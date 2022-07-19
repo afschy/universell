@@ -1,4 +1,5 @@
 const express = require('express');
+const session = require('express-session');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -11,6 +12,11 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(morgan('tiny'));
 app.use(express.static('public'));
+app.use(session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
+}));
 
 app.use('/', router);
 
