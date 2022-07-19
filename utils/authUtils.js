@@ -11,4 +11,4 @@ async function loginUser(res, user_id){
     res.cookie('sessionToken', token, options);
 }
 
-module.exports = loginUser;
+module.exports = {loginUser};
