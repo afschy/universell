@@ -10,7 +10,7 @@ router.get('/', (req, res) =>{
     }
     else console.log("homepage of user " + req.session.user_id);
     // TODO: send homepage
-    res.sendFile(path.resolve(__dirname + '../../html/homepage.html'))
+    res.sendFile(path.resolve(__dirname + '../../public/html/homepage.html'));
 });
 
 router.use('/login', loginRouter);

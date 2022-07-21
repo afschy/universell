@@ -8,7 +8,7 @@ router.get('/', (req, res) =>{
     if(!req.session.user_id){
         console.log("in login page");
         // TODO: send the login page
-        res.sendFile(path.resolve(__dirname+'../../../html/login.html'));
+        res.sendFile(path.resolve(__dirname + '../../../public/html/login.html'));
     }
     else{
         return res.redirect('/');

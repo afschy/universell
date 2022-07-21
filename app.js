@@ -20,12 +20,4 @@ app.use(session({
 
 app.use('/', router);
 
-// app.get('/', async(req, res) =>{
-//     console.log("in homepage");
-//     const sql = "SELECT COUNT(*)+11 AS count FROM Users";
-//     const binds = {};
-//     let ans = (await database.execute(sql, binds, database.options)).rows;
-//     console.log(ans[0].COUNT);
-// });
-
 module.exports = app;
