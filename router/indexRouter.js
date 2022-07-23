@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const router = express.Router({mergeParams: true});
 const loginRouter = require('./auth/login');
+const signupRouter = require('./auth/signup');
 
 router.get('/', (req, res) =>{
     if(!req.session.user_id){
@@ -14,5 +15,6 @@ router.get('/', (req, res) =>{
 });
 
 router.use('/login', loginRouter);
+router.use('/signup', signupRouter);
 
 module.exports = router;
