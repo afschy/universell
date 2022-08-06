@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const router = express.Router({mergeParams: true});
 const loginRouter = require('./auth/login');
+const signupRouter = require('./auth/signup');
 
 router.get('/', (req, res) =>{
     if(!req.session.user_id){
@@ -12,9 +13,10 @@ router.get('/', (req, res) =>{
     }
     else console.log("homepage of user " + req.session.user_id);
     // TODO: send homepage
-    res.sendFile(path.resolve(__dirname + '../../html/homepage.html'))
+    res.sendFile(path.resolve(__dirname + '../../public/html/homepage.html'));
 });
 
 router.use('/login', loginRouter);
+router.use('/signup', signupRouter);
 
 module.exports = router;

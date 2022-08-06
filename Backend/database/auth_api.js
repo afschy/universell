@@ -1,4 +1,5 @@
 const database = require('./database');
+const dateUtil = require('../utils/dateTime');
 
 async function getInfoById(user_id){
     const sql = `
@@ -11,6 +12,21 @@ async function getInfoById(user_id){
     return (await database.execute(sql,binds,database.options)).rows;
 }
 
+async function inputUser(user_id, password, name, email, dp){
+    const sql = `
+        INSERT INTO Users
+        VALUES(:u, :p, :n, :e, :c, :d)
+    `
+    let currDate = dateUtil.getOracleDate();
+    const binds = {u: user_id, p: password, n: name, e: email, c: currDate, d: dp};
+    await database.execute(sql, binds, database.options);
+    
+    let result = getInfoById(user_id);
+    if(result.length > 0) return true;
+    else return false;
+}
+
 module.exports = {
-    getInfoById
+    getInfoById,
+    inputUser
 };
