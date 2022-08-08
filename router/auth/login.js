@@ -7,8 +7,9 @@ const authApi = require('../../database/auth_api');
 router.get('/', (req, res) =>{
     if(!req.session.user_id){
         console.log("in login page");
-        // TODO: send the login page
-        res.sendFile(path.resolve(__dirname+'../../../public/html/login.html'));
+        // NOTE : login page rendering  res.render('userLoginPage', {PageName : "login"}); 
+        // NOTE : signup page rendering res.render('userSignUpPage', {PageName : "signup"});
+        res.render('userSignUpPage', {PageName : "login"});
     }
     else{
         return res.redirect('/');
@@ -16,15 +17,13 @@ router.get('/', (req, res) =>{
 });
 
 router.post('/', async(req, res) =>{
-    console.log(req.body.email);
-    console.log(req.body.password);
-    console.log(req.body.isChecked);
+    // console.log(req.body.email);
+    // console.log(req.body.password);
+    // console.log(req.body.isChecked);
 
     if(!req.session.user_id){
-        // TODO: send post request form login page
-        // post request must contain fields user_id and password
         let results = [], errors = [];
-        results = await authApi.getInfoById(req.body.user_id);
+        results = await authApi.getInfoByEmail(req.body.email);
         if(results.length == 0)
             errors.push("invalid user id");
         else{
@@ -40,7 +39,7 @@ router.post('/', async(req, res) =>{
         } 
 
         // TODO: handle errors in case of login failure
-        
+        res.render('userSignUpPage', {PageName : "login", errors: errors});
     }
 
     else res.redirect('/');

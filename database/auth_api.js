@@ -12,6 +12,17 @@ async function getInfoById(user_id){
     return (await database.execute(sql,binds,database.options)).rows;
 }
 
+async function getInfoByEmail(email){
+    const sql = `
+        SELECT user_id, password
+        FROM Users
+        WHERE email = :e
+    `;
+
+    const binds = {e: email};
+    return (await database.execute(sql,binds,database.options)).rows;
+}
+
 async function inputUser(user_id, password, name, email, dp){
     const sql = `
         INSERT INTO Users
@@ -28,5 +39,6 @@ async function inputUser(user_id, password, name, email, dp){
 
 module.exports = {
     getInfoById,
+    getInfoByEmail,
     inputUser
 };
