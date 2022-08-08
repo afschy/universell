@@ -9,6 +9,7 @@ process.env.UV_THREADPOOL_SIZE = 10;
 
 const port = process.env.PORT;
 app.listen(port, async () => {
+    console.log(port);
     try{
         // create database connection pool, log startup message
         console.log(port);

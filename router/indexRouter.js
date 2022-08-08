@@ -7,8 +7,10 @@ const signupRouter = require('./auth/signup');
 router.get('/', (req, res) =>{
     if(!req.session.user_id){
         console.log("Not logged in, redirecting to login page");
-        //return res.redirect('/login');
-        res.render('userSignUpPage', {PageName : "login"});
+
+        // NOTE : login page rendering  res.render('userLoginPage', {PageName : "login"}); 
+        // NOTE : signup page rendering res.render('userSignUpPage', {PageName : "signup"});
+        res.render('userSignUpPage', {PageName : "signup"});
     }
     else console.log("homepage of user " + req.session.user_id);
     // TODO: send homepage
