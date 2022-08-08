@@ -8,8 +8,7 @@ router.get('/', (req, res) =>{
     if(!req.session.user_id){
         console.log("Not logged in, redirecting to login page");
         //return res.redirect('/login');
-        //res.render('login');
-        res.render('userHomePage');
+        res.render('userHomePage', {homepage : 1, login : 1});
     }
     else console.log("homepage of user " + req.session.user_id);
     // TODO: send homepage
