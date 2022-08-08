@@ -16,6 +16,10 @@ router.get('/', (req, res) =>{
 });
 
 router.post('/', async(req, res) =>{
+    console.log(req.body.email);
+    console.log(req.body.password);
+    console.log(req.body.isChecked);
+
     if(!req.session.user_id){
         // TODO: send post request form login page
         // post request must contain fields user_id and password
