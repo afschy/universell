@@ -8,9 +8,6 @@ const router = require('./router/indexRouter')
 
 const app = express();
 
-
-
-
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -22,10 +19,8 @@ app.use(session({
     saveUninitialized: true
 }));
 
-
 // using ejs
 app.set('view engine', 'ejs')
-
 
 app.use('/', router);
 
