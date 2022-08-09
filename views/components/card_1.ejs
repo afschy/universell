@@ -1,67 +1,33 @@
 <div class="row">
 
+<% for(let i=0; i < homePagePosts.length; i++){ %>
+
 <div class="col-4">
 <div class="card mb-3 shadow-lg back-color-1">
-<img src="/images/tshirt.jpg" class="card-img-top" style="height: 15em;" alt="...">
+<img src=<%=homePagePosts[i].IMG%> class="card-img-top" style="height: 15em;" alt="...">
 <div class="card-body back-color-1">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    <h5 class="card-title"><%=homePagePosts[i].USERNAME%></h5>
+
+    <p class="card-text"><%=homePagePosts[i].DESCRIPTION%></p>
+    <p class="card-text">Product Name: <%=homePagePosts[i].PRODUCTNAME%></p>
+    <p class="card-text">Price: <%=homePagePosts[i].PRICE%></p>
+
+    <% if(homePagePosts[i].NEGOTIABLE == 1){ %>
+        <p class="card-text">(Price is Negotiable)</p>
+    <% }else{ %>
+        <p class="card-text">(Price is NOT Negotiable)</p>
+    <% } %>
+
+    <p class="card-text"><%=homePagePosts[i].REMAINING%> Units Remaining</p>
+    <p class="card-text">This post was upvoted by <%=homePagePosts[i].UPVOTECOUNT%> people</p>
+    <p class="card-text"><small class="text-muted">Created On: <%=homePagePosts[i].TIME%></small></p>
+
     <a href="#" class="btn btn-dark btn-block ">Buy now</a>
     <a href="#" class="btn btn-dark btn-block">Add to cart</a>
 </div>
 </div>
 </div>
 
-<div class="col-4">
-<div class="card mb-3 shadow-lg back-color-1">
-<img src="/images/iphone.jpg" class="card-img-top" style="height: 15em;" alt="...">
-<div class="card-body ">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    <a href="#" class="btn btn-dark btn-block">Buy now</a>
-    <a href="#" class="btn btn-dark btn-block">Add to cart</a>
-</div>
-</div>
-</div>
+<% } %>
 
-<div class="col-4">
-<div class="card mb-3 shadow-lg back-color-1">
-<img src="/images/iphone.jpg" class="card-img-top" style="height: 15em;" alt="...">
-<div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    <a href="#" class="btn btn-dark btn-block">Buy now</a>
-    <a href="#" class="btn btn-dark btn-block">Add to cart</a>
-</div>
-</div>
-</div>
-
-<div class="col-4">
-<div class="card mb-3 shadow-lg back-color-1">
-<img src="/images/iphone.jpg" class="card-img-top" style="height: 15em;" alt="...">
-<div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    <a href="#" class="btn btn-dark btn-block">Buy now</a>
-    <a href="#" class="btn btn-dark btn-block">Add to cart</a>
-</div>
-</div>
-</div>
-
-<div class="col-4">
-<div class="card mb-3 shadow-lg back-color-1">
-<img src="/images/iphone.jpg" class="card-img-top" style="height: 15em;" alt="...">
-<div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-    <a href="#" class="btn btn-dark btn-block">Buy now</a>
-    <a href="#" class="btn btn-dark btn-block">Add to cart</a>
-</div>
-</div>
-</div>
 </div>

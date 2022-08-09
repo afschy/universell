@@ -14,7 +14,7 @@ router.get('/', async(req, res) =>{
         return res.redirect('/login');
     }
     console.log("homepage of user " + req.session.user_id);
-   
+
     // For card_2
     let _topSellers = await user_api.getTopSellers(5);
     let _starSellers = await user_api.getStarSellers(5);
