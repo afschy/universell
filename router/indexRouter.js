@@ -35,6 +35,7 @@ router.get('/', async(req, res) =>{
         mostReviewdPosts: _mostReviewdPosts,
         homePagePosts: _homepagePosts
     };
+    console.log(_homepagePosts[0].UPVOTECOUNT);
     res.render('userHomePage.ejs', binds);
     // res.json(binds);
 });
