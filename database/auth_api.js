@@ -29,10 +29,6 @@ async function inputUser(password, name, email){
     `;
     const binds = {p: password, n: name, e: email};
     await database.execute(sql, binds, database.options);
-    
-    let result = getInfoByEmail(email);
-    if(result.length > 0) return true;
-    else return false;
 }
 
 module.exports = {

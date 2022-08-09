@@ -10,18 +10,29 @@ router.get('/', (req, res) =>{
 });
 
 router.post('/', async(req, res) =>{
-    console.log(req.body.fname);
-    console.log(req.body.lname);
-    console.log(req.body.phone);
-    console.log(req.body.email);
-    console.log(req.body.password);
-    console.log(req.body.cpassword);
-    console.log(req.body.isChecked);
+
+    if(req.body.password !== req.body.cpassword){
+        res.render('userSignUpPage', {PageName : "signup"});
+        return;
+    }
     
-    //IMPORTANT: the names of the form elements sent must exactly match the variable names after req.body.
+    let emailSearchResult = await authApi.getInfoByEmail(req.body.email);
+    if(emailSearchResult.length != 0){
+        res.render('userSignUpPage', {PageName : "signup"});
+        return;
+    }
+    
     await authApi.inputUser(req.body.password, req.body.name, req.body.email);
-    req.session.user_id = req.body.user_id;
-    res.redirect('/');
+    let result = await authApi.getInfoByEmail(req.body.email);
+    console.log(result);
+    
+    if(result.length > 0){
+        req.session.user_id = result[0].USER_ID;
+        res.redirect('/');
+        return;
+    }
+    else
+        res.render('userSignUpPage', {PageName : "signup"});
 });
 
 module.exports = router;
