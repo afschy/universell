@@ -1,5 +1,4 @@
 const database = require('./database');
-const dateUtil = require('../utils/dateTime');
 
 async function getInfoById(user_id){
     const sql = `
@@ -23,16 +22,15 @@ async function getInfoByEmail(email){
     return (await database.execute(sql,binds,database.options)).rows;
 }
 
-async function inputUser(user_id, password, name, email, dp){
+async function inputUser(password, name, email){
     const sql = `
-        INSERT INTO Users
-        VALUES(:u, :p, :n, :e, :c, :d)
-    `
-    let currDate = dateUtil.getOracleDate();
-    const binds = {u: user_id, p: password, n: name, e: email, c: currDate, d: dp};
+        INSERT INTO Users(PASSWORD, NAME, EMAIL, CREATE_DATE, DP)
+        VALUES(:p, :n, :e, SYSDATE, NULL)
+    `;
+    const binds = {p: password, n: name, e: email};
     await database.execute(sql, binds, database.options);
     
-    let result = getInfoById(user_id);
+    let result = getInfoByEmail(email);
     if(result.length > 0) return true;
     else return false;
 }

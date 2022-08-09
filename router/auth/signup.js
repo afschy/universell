@@ -6,6 +6,7 @@ const authApi = require('../../database/auth_api');
 
 router.get('/', (req, res) =>{
     //TODO: send signup page
+    res.render('userSignUpPage', {PageName : "signup"});
 });
 
 router.post('/', async(req, res) =>{
@@ -18,7 +19,7 @@ router.post('/', async(req, res) =>{
     console.log(req.body.isChecked);
     
     //IMPORTANT: the names of the form elements sent must exactly match the variable names after req.body.
-    await authApi.inputUser(req.body.user_id, req.body.password, req.body.name, req.body.email, req.body.dp);
+    await authApi.inputUser(req.body.password, req.body.name, req.body.email);
     req.session.user_id = req.body.user_id;
     res.redirect('/');
 });
