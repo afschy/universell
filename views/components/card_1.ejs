@@ -6,7 +6,7 @@
 <div class="card mb-3 shadow-lg back-color-1">
 <img src=<%=homePagePosts[i].IMG%> class="card-img-top" style="height: 15em;" alt="...">
 <div class="card-body back-color-1">
-    <h5 class="card-title" id=<%= "userName" + i %>><%=homePagePosts[i].USERNAME%></h5>
+    <h5 class="card-title"><%=homePagePosts[i].USERNAME%></h5>
 
     <p class="card-text"><%=homePagePosts[i].DESCRIPTION%></p>
     <p class="card-text">Product Name: <%=homePagePosts[i].PRODUCTNAME%></p>
@@ -22,12 +22,38 @@
     <p class="card-text">This post was upvoted by <%=homePagePosts[i].UPVOTECOUNT%> people</p>
     <p class="card-text"><small class="text-muted">Created On: <%=homePagePosts[i].TIME%></small></p>
 
-    <button class="btn btn-dark btn-block" id=<%= "buyNow" + i %>>Buy now</button>
-    <button class="btn btn-dark btn-block" id="addToCart">Add to cart</button>
+    <button class="btn btn-dark btn-block">Buy now</button>
+    <button class="btn btn-dark btn-block" id=<%= "addCartButton" + i %>>Add to cart</button>
 </div>
 </div>
 </div>
 
 <% } %>
+
+<% if(PageName == "home") { %> 
+<script>
+    let posts = <%- JSON.stringify(homePagePosts) %>;
+
+    for (let i = 0; i < posts.length; i++) {
+        $(`#addCartButton${i}`).click(function (e) {
+            console.log(posts[i]);
+            e.preventDefault();
+            $.ajax({
+            type: "POST",
+            url: "/cart/addToCart",
+            data: {
+                POST_ID : posts[i].POST_ID
+            },
+            success: function (res) {
+                $(`#cartNum`).html("(" + res.cartNum + ")"); 
+            },
+            error: function (result) {
+                alert('error');
+            }
+            });
+        });
+    }
+</script>
+<% } %> 
 
 </div>

@@ -10,35 +10,97 @@
                 <div class="row">
                     <h3 class="back-color-1 pt-2 pb-2 m-0 col-12" style="text-align: center;">Your Cart</h5>
                     <p class="back-color-2 pt-1 pb-1 pl-2 m-0 col-6"> Total Price : </p>
-                    <p class="back-color-2 pt-1 pb-1 pl-2 m-0 col-6"> 5000Tk </p>
+                    <p class="back-color-2 pt-1 pb-1 pl-2 m-0 col-6"> <%= totalCost %> Tk </p>
                     <p class="back-color-1 pt-2 pb-1 pl-2 m-0 col-6"> Delivery Charges : </p>
-                    <p class="back-color-1 pt-2 pb-1 pl-2 m-0 col-6"> 70Tk </p>
+                    <p class="back-color-1 pt-2 pb-1 pl-2 m-0 col-6"> 70 Tk </p>
                     <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-6"> Contact No: </p>
                     <div class="col-6 p-2 back-color-2" style="width: 100%;">
-                        <input type="text" class="form-control input-lg" placeholder="Search">
+                        <input type="text" class="form-control input-lg" id="contactNo" placeholder="Search">
                     </div>
                     <p class="back-color-1 pt-2 pb-1 pl-2 m-0 col-6"> Address: </p>
                     <div class="col-6 p-2 back-color-1" style="width: 100%;">
-                        <input type="text" class="form-control input-lg" placeholder="Search">
-                     </div> 
+                        <input type="text" class="form-control input-lg" id="address" placeholder="Search">
+                    </div> 
                     <div class="back-color-1 p-2 col-12" style="width: 100%;">
-                        <button class="btn btn-dark btn-block col-12" id="addToCart">Add to cart</button>
+                        <button class="btn btn-dark btn-block col-12" id="placeOrder">PLACE ORDER</button>
                     </div>
                 </div>
-            </div>
-
-          
-            <!-- <ul class="list-group list-group-flush">
-              
-              <li class="list-group-item">
-                <p href="#" class="card-text link-secondary"> Total Price : </p>
-                <p href="#" class="card-text link-secondary"> Total Price : </p>
-              </li>
-            
-            </ul> -->
-          
+            </div>   
           </div>
     </div>
 </div>
+
+<% if(PageName == "cart") { %> 
+    <script>
+        let posts = <%- JSON.stringify(cartPosts) %>;
+    
+        for (let i = 0; i < posts.length; i++) {
+            $(`#removeFromCart${i}`).click(function (e) {
+                e.preventDefault();
+                $.ajax({
+                type: "POST",
+                url: "/cart/removepost",
+                data: {
+                    POST_ID : posts[i].POST_ID
+                },
+                success: function (res) {
+                    $(document).ajaxStop(function(){
+                        window.location.reload();
+                    });
+                },
+                error: function (result) {
+                    alert('error');
+                }
+                });
+            });
+
+            $(`#updateQuantity${i}`).click(function (e) {
+                var Quantity = $(`#newQuantity${i}`).val();
+                console.log(Quantity);
+                e.preventDefault();
+                $.ajax({
+                type: "POST",
+                url: "/cart/updatecart",
+                data: {
+                    POST_ID : posts[i].POST_ID,
+                    QUANTITY : Quantity
+                },
+                success: function (res) {
+                    $(document).ajaxStop(function(){
+                        window.location.reload();
+                    });
+                },
+                error: function (result) {
+                    alert('error');
+                }
+                });
+            });
+        }
+
+        $(`#placeOrder`).click(function (e) {
+            var contactNo = $(`#contactNo`).val();
+            var address = $(`#address`).val();
+            console.log(contactNo);
+            console.log(address);
+            e.preventDefault();
+            $.ajax({
+            type: "POST",
+            url: "/cart/validate",
+            data: {
+                phone : contactNo,
+                address : address
+            },
+            success: function (res) {
+                $(document).ajaxStop(function(){
+                    window.location.reload();
+                });
+            },
+            error: function (result) {
+                alert('error');
+            }
+            });
+        });
+    </script>
+<% } %> 
 
 <%- include('components/footer'); -%>

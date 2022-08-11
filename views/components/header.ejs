@@ -70,20 +70,19 @@
         <div class="col-7"></div>
       <% } %> 
       
-
+      <% if(PageName == "home") { %>
         <div class="col-2 pt-3">
           <div class="row ">
             <div class="col-4" style="padding: 0; padding-top: 0.1em;">
-              <a href="#" class="card-link">
+              <a href="/cart" class="card-link">
                 <i class="bi bi-cart" style="display: inline; font-size: 25px;"> </i>
-                <p id="cartNum" style="display: inline; font-size:20px;"> (0) </p>
+                <p id="cartNum" style="display: inline; font-size:20px;"> (<%= cartNum %>) </p>
               </a>
             </div>
             <div class="col-4 pt-2" style="padding: 0;"> <a href="#" class="card-link text-type-1">Profile</a></div>
             <div class="col-4 pt-2" style="padding: 0;"> <a href="#" class="card-link text-type-1">Login</a> </div>
           </div>
         </div>
-        
-
+      <% } %> 
     </div>
   </div>
