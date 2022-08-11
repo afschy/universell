@@ -10,6 +10,11 @@ router.get('/', (req, res) =>{
 });
 
 router.post('/', async(req, res) =>{
+    // let postAddedCart = req.body.post;
+    // postAddedCart = JSON.parse(postAddedCart);
+    // console.log(postAddedCart.POST_ID);
+    // Now count total number of carts and send that.
+    // res.send({cartCount : 5});
 
     if(req.body.password !== req.body.cpassword){
         res.render('userSignUpPage', {PageName : "signup"});

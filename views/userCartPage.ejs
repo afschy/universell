@@ -1,0 +1,44 @@
+<%- include('components/header', {PageName : PageName}); -%>
+
+<div class="row" style="width: 100%; padding-left: 2em; padding-right: 2em; margin: 0;">
+    <div class="col-8 mt-5">
+       <%- include('components/card_3'); -%> 
+    </div>
+    <div class="col-4 pt-5 pl-5">
+        <div class="mb-4 p-3 shadow-lg" style="background-color: #0C8140; border-radius: 15px;">
+            <div class="pl-3 pr-3">
+                <div class="row">
+                    <h3 class="back-color-1 pt-2 pb-2 m-0 col-12" style="text-align: center;">Your Cart</h5>
+                    <p class="back-color-2 pt-1 pb-1 pl-2 m-0 col-6"> Total Price : </p>
+                    <p class="back-color-2 pt-1 pb-1 pl-2 m-0 col-6"> 5000Tk </p>
+                    <p class="back-color-1 pt-2 pb-1 pl-2 m-0 col-6"> Delivery Charges : </p>
+                    <p class="back-color-1 pt-2 pb-1 pl-2 m-0 col-6"> 70Tk </p>
+                    <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-6"> Contact No: </p>
+                    <div class="col-6 p-2 back-color-2" style="width: 100%;">
+                        <input type="text" class="form-control input-lg" placeholder="Search">
+                    </div>
+                    <p class="back-color-1 pt-2 pb-1 pl-2 m-0 col-6"> Address: </p>
+                    <div class="col-6 p-2 back-color-1" style="width: 100%;">
+                        <input type="text" class="form-control input-lg" placeholder="Search">
+                     </div> 
+                    <div class="back-color-1 p-2 col-12" style="width: 100%;">
+                        <button class="btn btn-dark btn-block col-12" id="addToCart">Add to cart</button>
+                    </div>
+                </div>
+            </div>
+
+          
+            <!-- <ul class="list-group list-group-flush">
+              
+              <li class="list-group-item">
+                <p href="#" class="card-text link-secondary"> Total Price : </p>
+                <p href="#" class="card-text link-secondary"> Total Price : </p>
+              </li>
+            
+            </ul> -->
+          
+          </div>
+    </div>
+</div>
+
+<%- include('components/footer'); -%>

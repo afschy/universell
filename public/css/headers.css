@@ -54,12 +54,9 @@
   }
 
   .back-color-2{
-    background-clip: content-box;
-    box-shadow: inset 0 0 0 10px lightGreen;
-    padding-right: 1em;
-    padding-left: 0;
-    border-color: black;
+    background-color: #CFE8A9;
   }
+
 
   .card-image{
     height: 8em;
@@ -73,5 +70,13 @@
   .checkbox-label {margin-left: 5px; margin-top: 2px;}
 
   .logo-color{
+    color: #0C8140;
+  }
+
+  a{
+    color: black;
+  }
+
+  a:hover {
     color: #0C8140;
   }

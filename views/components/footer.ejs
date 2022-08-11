@@ -1,9 +1,37 @@
-  <div class="container-lg footer-style">
-    <footer class="my-3">
-      <p class="text-center text-muted text-type-1" style="margin: 0;">Made By Protoy and Farhand.</p>
-      <p class="text-center text-muted text-type-1" style="margin: 0;">All rights reseved.</p>
-    </footer>
-  </div>
+<div class="container-lg footer-style">
+  <footer class="my-3">
+    <p class="text-center text-muted text-type-1" style="margin: 0;">Made By Protoy and Farhand.</p>
+    <p class="text-center text-muted text-type-1" style="margin: 0;">All rights reseved.</p>
+  </footer>
+</div>
 
-  </body>
+
+<% if(PageName == "home") { %> 
+<script>
+  let posts = <%- JSON.stringify(homePagePosts) %>;
+
+  for (let i = 0; i < posts.length; i++) {
+    $(`#buyNow${i}`).click(function (e) {
+      console.log(posts[i]);
+      e.preventDefault();
+      $.ajax({
+        type: "POST",
+        url: "/signup",
+        data: {
+          post : JSON.stringify(posts[i])
+        },
+        success: function (res) {
+          $(`#cartNum`).html("(" + res.cartCount + ")"); 
+        },
+        error: function (result) {
+          alert('error');
+        }
+      });
+    });
+  }
+</script>
+<% } %> 
+
+</body>
+
 </html>
