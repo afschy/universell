@@ -1,5 +1,5 @@
 CREATE TABLE Users(
-	user_id NUMBER,
+	user_id NUMBER GENERATED ALWAYS AS IDENTITY(START WITH 1 INCREMENT BY 1),
 	password VARCHAR(20) NOT NULL,
 	name VARCHAR(50) NOT NULL,
 	email VARCHAR(70) NOT NULL UNIQUE,
@@ -15,7 +15,7 @@ CREATE TABLE Message(
 	receiver_id NUMBER NOT NULL,
 	text varchar(200),
 	image varchar(100),
-	time TIMESTAMP WITH LOCAL TIME ZONE,
+	time DATE,
 	CONSTRAINT message_pk PRIMARY KEY(msg_id),
 	CONSTRAINT message_users_fk1 FOREIGN KEY(sender_id) REFERENCES Users(user_id),
 	CONSTRAINT message_users_fk2 FOREIGN KEY(receiver_id) REFERENCES Users(user_id)
@@ -31,17 +31,17 @@ CREATE TABLE Product(
 	CONSTRAINT product_pk PRIMARY KEY(product_id)
 );
 
-CREATE TABLE ProductReview(
+CREATE TABLE Review(
 	review_id NUMBER GENERATED ALWAYS AS IDENTITY(START WITH 1 INCREMENT BY 1),
 	user_id NUMBER,
-	product_id NUMBER,
+	post_id NUMBER,
 	text VARCHAR(500),
 	image VARCHAR(100),
 	num_stars NUMBER,
 	
-	CONSTRAINT productreview_pk PRIMARY KEY(review_id),
-	CONSTRAINT productreview_users_fk FOREIGN KEY(user_id) REFERENCES Users(user_id),
-	CONSTRAINT productreview_product_fk FOREIGN KEY(product_id) REFERENCES Product(product_id),
+	CONSTRAINT review_pk PRIMARY KEY(review_id),
+	CONSTRAINT review_users_fk FOREIGN KEY(user_id) REFERENCES Users(user_id),
+	CONSTRAINT review_product_fk FOREIGN KEY(post_id) REFERENCES Post(post_id),
 	CONSTRAINT numstars_range CHECK(num_stars >= 1 AND num_stars <= 5)
 );
 
@@ -56,7 +56,7 @@ CREATE TABLE Post(
 	description VARCHAR(500),
 	price NUMBER NOT NULL,
 	rem_quantity NUMBER NOT NULL,
-	time TIMESTAMP WITH LOCAL TIME ZONE,
+	time DATE,
 	negotiable NUMBER NOT NULL,
 	poster_id NUMBER,
 	product_id NUMBER,
@@ -72,7 +72,7 @@ CREATE TABLE Post(
 CREATE TABLE Cmnt(
 	cmnt_id NUMBER GENERATED ALWAYS AS IDENTITY(START WITH 1 INCREMENT BY 1),
 	text VARCHAR(500),
-	time TIMESTAMP WITH LOCAL TIME ZONE,
+	time DATE,
 	image VARCHAR(100),
 	writer_id NUMBER,
 	post_id NUMBER,
