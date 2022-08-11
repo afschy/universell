@@ -1,9 +1,11 @@
 const express = require('express');
 const path = require('path');
 const router = express.Router({mergeParams: true});
+
 const loginRouter = require('./auth/login');
 const signupRouter = require('./auth/signup');
 const profileRouter = require('./user/profile');
+const cartRouter = require('./user/cart');
 
 const user_api = require('../database/user_api');
 const post_api = require('../database/post_api');
@@ -43,5 +45,6 @@ router.get('/', async(req, res) =>{
 router.use('/login', loginRouter);
 router.use('/signup', signupRouter);
 router.use('/profile', profileRouter);
+router.use('/cart', cartRouter);
 
 module.exports = router;
