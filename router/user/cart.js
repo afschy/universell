@@ -26,8 +26,13 @@ router.post('/removepost', async(req, res) =>{
 });
 
 router.post('/validate', async(req, res) =>{
-    await cart_api.validateCart(126, '01798081016', 'BUET, DHAKA, BANGLADESH');
+    await cart_api.validateCart(req.session.user_id, req.body.phone, req.body.address);
     res.redirect('/');
+});
+
+router.post('/addtocart', async(req, res) =>{
+    let post_id = req.body.POST_ID;
+    await cart_api.addToCart(req.session.user_id, post_id, 1);
 });
 
 module.exports = router;
