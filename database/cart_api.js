@@ -42,7 +42,38 @@ async function validateCart(user_id, phone, address){
         VALIDATE_CART(:ID, :PHN, :ADDR);
     END;
     `;
-    binds = {ID: user_id, PHN: phone, ADDR: address};
+    const binds = {ID: user_id, PHN: phone, ADDR: address};
+    await database.execute(sql,binds,database.options);
+}
+
+async function addToCart(user_id, post_id, quantity){
+    const sql = `
+    INSERT INTO CART VALUES(:u, :p, :q, 
+    (
+        SELECT :q * PRICE
+        FROM POST
+        WHERE POST_ID = :p
+    ))
+    `;
+    const binds = {
+        u: user_id,
+        p: post_id,
+        q: quantity
+    }
+    await database.execute(sql,binds,database.options);
+}
+
+async function updateQuantity(user_id, post_id, new_quantity){
+    const sql = `
+    UPDATE CART
+    SET QUANTITY = :q
+    WHERE USER_ID = :u AND POST_ID = :p
+    `;
+    const binds = {
+        u: user_id,
+        p: post_id,
+        q: new_quantity
+    }
     await database.execute(sql,binds,database.options);
 }
 
@@ -50,5 +81,7 @@ module.exports = {
     getCartPosts,
     deleteFromCart,
     getTotalCartCost,
-    validateCart
+    validateCart,
+    addToCart,
+    updateQuantity
 }
