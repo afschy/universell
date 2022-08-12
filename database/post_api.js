@@ -65,19 +65,30 @@ async function getWishlistPosts(user_id, offset, limit){
     ORDER BY UPVOTECOUNT DESC
     OFFSET :o ROWS
     FETCH FIRST :l ROWS ONLY
-    `
+    `;
 
     const binds = {
         u: user_id,
         o: offset,
         l: limit
-    }
+    };
     return (await database.execute(sql, binds, database.options)).rows;
+}
+
+async function getRemainingNum(post_id){
+    const sql = `
+    SELECT REM_QUANTITY AS REMAINING
+    FROM POST
+    WHERE POST_ID = :p
+    `;
+    const binds = {p: post_id};
+    return (await database.execute(sql, binds, database.options)).rows; 
 }
 
 module.exports = {
     getNewPosts,
     getTopPosts,
     getWishlistPosts,
-    getMostReviewedPosts
+    getMostReviewedPosts,
+    getRemainingNum
 }

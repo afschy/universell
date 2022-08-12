@@ -6,7 +6,7 @@ const authApi = require('../../database/auth_api');
 
 router.get('/', (req, res) =>{
     if(!req.session.user_id){
-        console.log("in login page");
+        //console.log("in login page");
         // NOTE : login page rendering  res.render('userLoginPage', {PageName : "login"}); 
         // NOTE : signup page rendering res.render('userSignUpPage', {PageName : "signup"});
         res.render('userSignUpPage', {PageName : "login"});

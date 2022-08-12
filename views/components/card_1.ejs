@@ -6,10 +6,10 @@
 <div class="card mb-3 shadow-lg back-color-1">
 <img src=<%=homePagePosts[i].IMG%> class="card-img-top" style="height: 15em;" alt="...">
 <div class="card-body back-color-1">
-    <h5 class="card-title"><%=homePagePosts[i].USERNAME%></h5>
+    <h5 class="card-title"><%=homePagePosts[i].PRODUCTNAME%></h5>
 
     <p class="card-text"><%=homePagePosts[i].DESCRIPTION%></p>
-    <p class="card-text">Product Name: <%=homePagePosts[i].PRODUCTNAME%></p>
+    <p class="card-text">Seller: <%=homePagePosts[i].USERNAME%></p>
     <p class="card-text">Price: <%=homePagePosts[i].PRICE%></p>
 
     <% if(homePagePosts[i].NEGOTIABLE == 1){ %>
@@ -36,7 +36,7 @@
 
     for (let i = 0; i < posts.length; i++) {
         $(`#addCartButton${i}`).click(function (e) {
-            console.log(posts[i]);
+            // console.log(posts[i]);
             e.preventDefault();
             $.ajax({
             type: "POST",
