@@ -54,7 +54,7 @@
 
             $(`#updateQuantity${i}`).click(function (e) {
                 var Quantity = $(`#newQuantity${i}`).val();
-                console.log(Quantity);
+                //console.log(Quantity);
                 e.preventDefault();
                 $.ajax({
                 type: "POST",
@@ -78,8 +78,8 @@
         $(`#placeOrder`).click(function (e) {
             var contactNo = $(`#contactNo`).val();
             var address = $(`#address`).val();
-            console.log(contactNo);
-            console.log(address);
+            //console.log(contactNo);
+            //console.log(address);
             e.preventDefault();
             $.ajax({
             type: "POST",

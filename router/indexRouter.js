@@ -14,10 +14,10 @@ const cart_api = require('../database/cart_api');
 router.get('/', async(req, res) =>{
     //res.render('userCartPage', {PageName : "cart"});
     if(!req.session.user_id){
-        console.log("Not logged in, redirecting to login page");
+        // console.log("Not logged in, redirecting to login page");
         return res.redirect('/login');
     }
-    console.log("homepage of user " + req.session.user_id);
+    // console.log("homepage of user " + req.session.user_id);
 
     // For card_2
     let _topSellers = await user_api.getTopSellers(5);
@@ -42,7 +42,7 @@ router.get('/', async(req, res) =>{
         cartNum : _cartPosts.length
         // cart_item needs to be added
     };
-    console.log(_homepagePosts[0].UPVOTECOUNT);
+    // console.log(_homepagePosts[0].UPVOTECOUNT);
     res.render('userHomePage.ejs', binds);
     //res.json(binds);
 });

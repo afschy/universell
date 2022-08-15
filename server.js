@@ -12,7 +12,7 @@ app.listen(port, async () => {
     console.log(port);
     try{
         // create database connection pool, log startup message
-        console.log(port);
+        // console.log(port);
         await database.startup();
         console.log('listening on http://localhost:${port}');
     } catch(err) {

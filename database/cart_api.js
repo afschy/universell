@@ -1,8 +1,9 @@
 const database = require('./database');
+const post_api = require('./post_api');
 
 async function getCartPosts(user_id){
     const sql = `
-    SELECT C.POST_ID AS POST_ID, P.DESCRIPTION AS DESCRIPTION, U.NAME AS USERNAME, PR.NAME AS PRODUCTNAME, C.QUANTITY AS QUANTITY, P.NEGOTIABLE AS NEGOTIABLE, C.TOTAL AS TOTAL, GET_FIRST_POST_IMAGE(C.POST_ID) AS IMG
+    SELECT C.POST_ID AS POST_ID, P.DESCRIPTION AS DESCRIPTION, U.NAME AS USERNAME, PR.NAME AS PRODUCTNAME, C.QUANTITY AS QUANTITY, P.NEGOTIABLE AS NEGOTIABLE, C.TOTAL AS TOTAL, GET_FIRST_POST_IMAGE(C.POST_ID) AS IMG, P.REM_QUANTITY AS REMAINING
     FROM CART C 
     JOIN POST P ON C.POST_ID = P.POST_ID
     JOIN USERS U ON U.USER_ID = P.POSTER_ID
@@ -47,6 +48,9 @@ async function validateCart(user_id, phone, address){
 }
 
 async function addToCart(user_id, post_id, quantity){
+    let remaining = await post_api.getRemainingNum(post_id);
+    if(remaining[0].REMAINING <= 0) return;
+
     const sql = `
     INSERT INTO CART VALUES(:u, :p, :q, 
     (

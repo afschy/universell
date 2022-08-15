@@ -29,7 +29,7 @@ router.post('/', async(req, res) =>{
     
     await authApi.inputUser(req.body.password, req.body.name, req.body.email);
     let result = await authApi.getInfoByEmail(req.body.email);
-    console.log(result);
+    //console.log(result);
     
     if(result.length > 0){
         req.session.user_id = result[0].USER_ID;
