@@ -6,6 +6,9 @@ const loginRouter = require('./auth/login');
 const signupRouter = require('./auth/signup');
 const profileRouter = require('./user/profile');
 const cartRouter = require('./user/cart');
+const postsRouter = require('./general/posts');
+const reviewRouter = require('./general/review');
+const cmntRouter = require('./general/cmnt');
 
 const user_api = require('../database/user_api');
 const post_api = require('../database/post_api');
@@ -51,5 +54,8 @@ router.use('/login', loginRouter);
 router.use('/signup', signupRouter);
 router.use('/profile', profileRouter);
 router.use('/cart', cartRouter);
+router.use('/posts', postsRouter);
+router.use('/review', reviewRouter);
+router.use('/cmnt', cmntRouter);
 
 module.exports = router;

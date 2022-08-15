@@ -82,7 +82,59 @@ async function getRemainingNum(post_id){
     WHERE POST_ID = :p
     `;
     const binds = {p: post_id};
-    return (await database.execute(sql, binds, database.options)).rows; 
+    return (await database.execute(sql, binds, database.options)).rows;
+}
+
+async function getAllInfo(post_id){
+    const sql = `
+    SELECT P.POST_ID AS POST_ID, P.DESCRIPTION AS DESCRIPTION, P.NEGOTIABLE AS NEGOTIABLE, U.NAME AS SELLERNAME, P.PRICE AS PRICE, PR.NAME AS PRODUCTNAME,
+    P.REM_QUANTITY AS REMAINING, P.TIME AS TIME, GET_UPVOTE_COUNT(P.POST_ID) AS UPVOTECOUNT
+    FROM POST P
+    JOIN PRODUCT PR ON P.PRODUCT_ID = PR.PRODUCT_ID
+    JOIN USERS U ON U.USER_ID = P.POSTER_ID
+    WHERE P.POST_ID = :p
+    `;
+    const binds = {p: post_id};
+    let result = (await database.execute(sql, binds, database.options)).rows;
+    return result[0];
+}
+
+async function getImages(post_id){
+    const sql = `
+    SELECT IMAGE FROM POSTIMAGE
+    WHERE POST_ID = :p
+    `;
+    const binds = {p: post_id};
+    return (await database.execute(sql, binds, database.options)).rows;
+}
+
+async function hasUpvotedPost(user_id, post_id){
+    const sql = `
+    SELECT COUNT(*) AS COUNTER
+    FROM POSTUPVOTE
+    WHERE USER_ID = :u AND POST_ID = :p
+    `;
+    const binds = {u: user_id, p: post_id};
+    
+    let result = (await database.execute(sql, binds, database.options)).rows;
+    return result[0].COUNTER;
+}
+
+async function addUpvote(user_id, post_id){
+    const sql = `
+    INSERT INTO POSTUPVOTE VALUES(:u, :p)
+    `;
+    const binds = {u: user_id, p: post_id};
+    await database.execute(sql, binds, database.options);
+}
+
+async function removeUpvote(user_id, post_id){
+    const sql = `
+    DELETE FROM POSTUPVOTE
+    WHERE USER_ID = :u AND POST_ID = :p
+    `;
+    const binds = {u: user_id, p: post_id};
+    await database.execute(sql, binds, database.options);
 }
 
 module.exports = {
@@ -90,5 +142,10 @@ module.exports = {
     getTopPosts,
     getWishlistPosts,
     getMostReviewedPosts,
-    getRemainingNum
+    getRemainingNum,
+    getAllInfo,
+    getImages,
+    hasUpvotedPost,
+    addUpvote,
+    removeUpvote
 }
