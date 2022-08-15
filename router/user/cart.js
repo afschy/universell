@@ -26,7 +26,6 @@ router.post('/removepost', async(req, res) =>{
 });
 
 router.post('/validate', async(req, res) =>{
-    console.log(req.body);
     await cart_api.validateCart(req.session.user_id, req.body.phone, req.body.address);
     res.redirect('/');
 });
@@ -39,7 +38,6 @@ router.post('/addtocart', async(req, res) =>{
 });
 
 router.post('/updatecart', async(req, res) =>{
-    console.log(req.body);
     await cart_api.updateQuantity(req.session.user_id, req.body.POST_ID, req.body.QUANTITY);
     res.redirect('/');
 });
