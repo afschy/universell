@@ -36,16 +36,24 @@
   <!-- JQuery CDN -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+  <!-- Popper and JQuery CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  <!-- FontAwesome CDN -->
+  <script src="https://kit.fontawesome.com/cc8b802a8c.js" crossorigin="anonymous"></script>
+  
+
 
 </head>
 
-<body class="pb-3 text-type-1">
+<body class="text-type-1" style="padding-bottom: 100px;">
   <div class="back-color-1">
     <div class="row md-2 w-100 pl-5">
 
       <div class="col-3 pl-4 pt-3">
         <a href="/">
-          <img class="main-logo pl-4%" src="images/Universell_logo.png" alt="">
+          <img class="main-logo pl-4%" src="/images/Universell_logo.png" alt="">
         </a>
       </div>
 
@@ -79,7 +87,7 @@
                 <p id="cartNum" style="display: inline; font-size:20px;"> (<%= cartNum %>) </p>
               </a>
             </div>
-            <div class="col-4 pt-2" style="padding: 0;"> <a href="#" class="card-link text-type-1">Profile</a></div>
+            <div class="col-4 pt-2" style="padding: 0;"> <a href="/profile" class="card-link text-type-1">Profile</a></div>
             <div class="col-4 pt-2" style="padding: 0;"> <a href="#" class="card-link text-type-1">Login</a> </div>
           </div>
         </div>

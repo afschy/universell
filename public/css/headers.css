@@ -74,9 +74,55 @@
   }
 
   a{
-    color: black;
+    color: black !important;
   }
 
   a:hover {
-    color: #0C8140;
+    color: #0C8140 !important;
+  }
+
+  .carousel-link:hover {
+    color: black !important;
+  }
+
+
+  .container {
+    position: relative;
+  }
+
+  .upvote .btn {
+    padding: 0%; 
+    border-radius: 0.25rem 0rem 0rem 0.25rem;
+  }
+
+  .upvote .btn .bi{
+    font-size: 20px;
+  }
+
+  .upvote .upvoteoff{
+    background-color: black; 
+    color: white;
+  }
+
+  .upvote .upvoteoff:hover {
+    background-color:orange ;
+    color: black;
+  }
+
+  .upvote .upvoteon{
+    background-color:orange ;
+    color: black;
+  }
+
+  .upvote .upvoteon:hover{
+    background-color: black; 
+    color: white;
+  }
+
+  .checked{
+    color: orange;
+  }
+
+  .unchecked{
+    color: black;
   }
