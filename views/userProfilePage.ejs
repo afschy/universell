@@ -2,16 +2,168 @@
 
 <div class="row m-5">
     <div class="col-4 text-center">
-        <img src="images/iphone.jpg" class="rounded" alt="..." style="height: 300px; width: 300px;">
+        <img src="../images/post_placeholder.jpg" class="rounded" alt="..." style="height: 300px; width: 300px;">
         <h2 class="mt-2" style="text-align: center;">Username</h2>
     </div>
     <div class="col-8">
-        <%- include('components/navbar.ejs'); -%>
-        <div>
-            <h1>Placeholder</h1>
+        <div class="row text-center">
+            <div class="col-2 ">
+                <a class="card-link link-color-1" href="/profile/settings"><h4 class="profile-nav">Settings</h4></a>
+            </div>
+            <div class="col-2">
+                <a class="card-link link-color-1" href="/profile/createpost"><h4 class="profile-nav">New Post</h4></a>
+            </div>
+            <div class="col-2 link-color-1">
+                <a class="card-link link-color-1" href="/profile/posts"> <h4 class="profile-nav">Posts</h4></a>
+            </div>
+            <div class="col-2">
+                <a class="card-link link-color-1" href="/profile/reviews"><h4 class="profile-nav">Reviews</h4></a>
+            </div>
+            <div class="col-2">
+                <h4 class="profile-nav">Settings</h4>
+            </div>
+            <div class="col-2">
+                <h4 class="profile-nav">Settings</h4>
+            </div>
+        </div>
+        <%= console.log(reviews) %> 
+
+        <div class="row text-center p-4 mt-3" style="border: solid black; border-width: 0.25em; border-radius: 0.25;">
+            <% if(PageName == "settings") { %>
+
+                    <h3 class="back-color-2 pt-3 pb-1 pl-2 m-0 col-12"> UPDATE INFO </h3>
+                    <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> Email: </p>
+                    <div class="col-8 p-2 back-color-2" style="width: 100%;">
+                        <input type="text" class="form-control input-lg" id="contactNo" placeholder="Search">
+                    </div>
+                    <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> Contact No: </p>
+                    <div class="col-8 p-2 back-color-2" style="width: 100%;">
+                        <input type="text" class="form-control input-lg" id="contactNo" placeholder="Search">
+                    </div>
+                    <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> Contact No: </p>
+                    <div class="col-8 p-2 back-color-2" style="width: 100%;">
+                        <input type="text" class="form-control input-lg" id="contactNo" placeholder="Search">
+                    </div>
+                    <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> Contact No: </p>
+                    <div class="col-8 p-2 back-color-2" style="width: 100%;">
+                        <input type="text" class="form-control input-lg" id="contactNo" placeholder="Search">
+                    </div>  
+                    <div class="col-9 back-color-2 pt-3 pb-1 pl-2 m-0">
+
+                    </div>
+                    <div class="col-3 back-color-2 pt-3 pb-1 pl-2 m-0">
+                        <button id="addReview" class="btn btn-dark btn-block">UPDATE</button>
+                    </div>
+
+            <% } else if(PageName == "createpost") { %>
+                
+                <h3 class="back-color-2 pt-3 pb-1 pl-2 m-0 col-12"> NEW POST DETAILS </h3>
+                <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> PRODUCT NAME: </p>
+                <div class="col-8 p-2 back-color-2" style="width: 100%;">
+                    <input id="productName" type="text" class="form-control input-lg" placeholder="Search">
+                </div>
+                <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> DESCRIPTION: </p>
+                <div class="col-8 p-2 back-color-2" style="width: 100%;">
+                    <input id="productDescription" type="text" class="form-control input-lg" placeholder="Search">
+                </div>
+                <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> QUANTITY: </p>
+                <div class="col-8 p-2 back-color-2" style="width: 100%;">
+                    <input id="productQuantity" type="text" class="form-control input-lg" placeholder="Search">
+                </div>
+                <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> NEGOTIABILITY: </p>
+                <div class="col-8 p-2 back-color-2" style="width: 100%;">
+                    <input id="productNegotiability" type="text" class="form-control input-lg" placeholder="Search">
+                </div>  
+                <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> PRICE: </p>
+                <div class="col-8 p-2 back-color-2" style="width: 100%;">
+                    <input id="productPrice" type="text" class="form-control input-lg" placeholder="Search">
+                </div>
+                <div class="col-9 back-color-2 pt-3 pb-1 pl-2 m-0">
+
+                </div>
+                <div class="col-3 back-color-2 pt-3 pb-1 pl-2 m-0">
+                    <button id="createpost" class="btn btn-dark btn-block">ADD POST</button>
+            <% } else if(PageName == "posts") { %>
+            
+                    
+                        <% for(let i=0; i < posts.length; i++){ %>
+                            <div class="card mb-3 back-color-1 shadow-lg" style="max-height: 220px; width: 100%;">
+                                <div class="row" >
+                                    <div class="col-3" style="height: 100%;">
+                                        <img src=<%=posts[i].IMG%> class="card-img" style="height: 100%; width: 220px;" alt="...">
+                                    </div>
+                                    <div class="col-5" >
+                                        <div class="card-body" >
+                                            <% let route1 = "/posts/" +  posts[i].POST_ID + "/postPage" %> 
+                                            <a class="card-link" href= <%= route1 %>><h3 class="card-title pd-5"><%= posts[i].PRODUCTNAME %></h3></a>
+                                            <p class="card-text"><%= posts[i].DESCRIPTION %></p>
+                                            <small class="text-muted">Units Remaining: <%= posts[i].REMAINING %></small></p>
+                                        </div>
+                                    </div>
+                                    <div class="col-4" >
+                                        <div class="card-body" >
+                                            <button class="btn btn-dark btn-block pd-3" id=<%= "removeFromCart" + i %>>REMOVE POST</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <% } %> 
+                    
+            <% } else if(PageName == "reviews") { %>
+
+                <% for(let i=0; i < reviews.length; i++){ %>
+                    <div class="card mb-3 back-color-1 shadow-lg" style="max-height: 220px; width: 100%;">
+                        <div class="row" >
+                            <div class="col-3" style="height: 100%;">
+                                <img src="/images/post_placeholder.jpg" class="card-img" style="height: 100%; width: 220px;" alt="...">
+                            </div>
+                            <div class="col-5" >
+                                <div class="card-body" >
+                                    <% let route1 = "/posts/" +  reviews[i].REVIEW_ID + "/postPage" %> 
+                                    <p class="card-text"><%= reviews[i].TEXT %></p>
+                                </div>
+                            </div>
+                            <div class="col-4" >
+                                <div class="card-body" >
+                                    <% let route2 = "/posts/" +  reviews[i].POST_ID + "/postPage" %>
+                                    <button class="btn btn-dark btn-block pd-3" > <a class="card-link" style="color: white  !important;" href=<%= route2 %>>VISIT POST</a> </button>
+                                    <button class="btn btn-dark btn-block pd-3" >REMOVE REVIEW</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+
+            <% } %> 
         </div>
     </div>
 </div>
+
+<script>
+    $(`#createpost`).click(function (e) {
+        e.preventDefault();
+        console.log(event.target.id);
+        $.ajax({
+        type: "POST",
+        url: "/profile/createpost",
+        data: {
+            PRODUCTNAME: $(`#productName`).val(),
+            DESCRIPTION: $(`#productDescription`).val(),
+            REM_QUANTITY: $(`#productQuantity`).val(),
+            NEGOTIABLE: $(`#productNegotiability`).val(),
+            PRICE: $(`#productPrice`).val()
+        },
+        success: function (res) {
+            $(document).ajaxStop(function(){
+                window.location.reload();
+            });
+        },
+        error: function (result) {
+            alert('error');
+        }
+        });
+    });
+</script>
 
 
 <%- include('components/footer'); -%>

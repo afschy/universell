@@ -77,9 +77,6 @@
     color: black !important;
   }
 
-  a:hover {
-    color: #0C8140 !important;
-  }
 
   .carousel-link:hover {
     color: black !important;
@@ -125,4 +122,14 @@
 
   .unchecked{
     color: black;
+  }
+
+  .profile-nav{
+    padding: 0.15em;
+    margin: 0;
+  }
+
+  .profile-nav:hover{
+    background-color:  #96E58A;
+    border-radius: 0.25em;
   }
