@@ -2,7 +2,7 @@ const database = require('./database');
 
 async function getInfoById(user_id){
     const sql = `
-        SELECT user_id, password
+        SELECT *
         FROM Users
         WHERE user_id = :id
     `
@@ -12,7 +12,7 @@ async function getInfoById(user_id){
 
 async function getInfoByEmail(email){
     const sql = `
-        SELECT user_id, password
+        SELECT *
         FROM Users
         WHERE email = :e
     `;

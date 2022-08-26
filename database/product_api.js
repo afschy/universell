@@ -13,6 +13,29 @@ async function getMostReviewedProducts(num){
     return (await database.execute(sql, binds, database.options)).rows;
 }
 
+async function getProductInfoByName(productName){
+    const sql = `
+    SELECT * FROM PRODUCT
+    WHERE LOWER(NAME) = LOWER(:p)
+    `;
+    const binds = {p: productName};
+
+    let result = (await database.execute(sql, binds, database.options)).rows;
+    if(result.length > 0) return result[0];
+    createNewProduct(productName, 'unspecified', null, null, null);
+}
+
+async function createNewProduct(name, manufacturer, description, market_price_min, market_price_max){
+    const sql = `
+    INSERT INTO PRODUCT(NAME, MANUFACTURER, DESCRIPTION, MARKET_PRICE_MIN, MARKET_PRICE_MAX)
+    VALUES(:n, :m, :d, :m1, :m2)
+    `;
+    const binds = {n: name, m: manufacturer, d: description, m1: market_price_min, m2: market_price_max};
+    await database.execute(sql, binds, database.options);
+}
+
 module.exports = {
-    getMostReviewedProducts
+    getMostReviewedProducts,
+    getProductInfoByName,
+    createNewProduct
 }

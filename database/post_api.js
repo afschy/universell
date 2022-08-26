@@ -1,5 +1,14 @@
 const database = require('./database');
 
+async function createNewPost(description, price, rem_quantity, negotiable, poster_id, product_id){
+    const sql = `
+    INSERT INTO POST(DESCRIPTION, PRICE, REM_QUANTITY, TIME, NEGOTIABLE, POSTER_ID, PRODUCT_ID)
+    VALUES(:d, :p, :r, SYSDATE, :n, :po, :pr)
+    `;
+    const binds = {d: description, p: price, r: rem_quantity, n: negotiable, po: poster_id, pr: product_id};
+    await database.execute(sql, binds, database.options);
+}
+
 async function getNewPosts(offset, limit){
     const sql = `
     SELECT P.POST_ID AS POST_ID, P.DESCRIPTION AS DESCRIPTION, P.PRICE AS PRICE, P.REM_QUANTITY AS REMAINING, P.TIME AS TIME, P.NEGOTIABLE AS NEGOTIABLE, U.USER_ID AS USER_ID, U.NAME AS USERNAME, PR.NAME AS PRODUCTNAME, GET_FIRST_POST_IMAGE(P.POST_ID) AS IMG, GET_UPVOTE_COUNT(POST_ID) AS UPVOTECOUNT
@@ -138,6 +147,7 @@ async function removeUpvote(user_id, post_id){
 }
 
 module.exports = {
+    createNewPost,
     getNewPosts,
     getTopPosts,
     getWishlistPosts,
