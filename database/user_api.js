@@ -53,9 +53,31 @@ async function getReviewsByID(user_id){
     return (await database.execute(sql, binds, database.options)).rows;
 }
 
+async function getAllSellTransactions(user_id){
+    const sql = `
+    SELECT ORDER_ID, T.USER_ID AS BUYER_ID, U.NAME AS BUYER_NAME, T.POST_ID AS POST_ID, T.TIME AS TIME, QUANTITY, STATUS, AMOUNT, PHONE, ADDRESS
+    FROM TRANSACTION T
+    JOIN POST P
+    ON P.POST_ID = T.POST_ID
+    JOIN USERS U
+    ON T.USER_ID = U.USER_ID
+    WHERE P.POSTER_ID = :u
+    `;
+    const binds = {u: user_id};
+    return (await database.execute(sql, binds, database.options)).rows;
+}
+
+async function getAllBuyTransactions(user_id){
+    const sql = 'SELECT * FROM TRANSACTION WHERE USER_ID = :u';
+    const binds = {u: user_id};
+    return (await database.execute(sql, binds, database.options)).rows;
+}
+
 module.exports = {
     getTopSellers,
     getStarSellers,
     getPostsByID,
-    getReviewsByID
+    getReviewsByID,
+    getAllSellTransactions,
+    getAllBuyTransactions
 }

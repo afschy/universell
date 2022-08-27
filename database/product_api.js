@@ -23,6 +23,7 @@ async function getProductInfoByName(productName){
     let result = (await database.execute(sql, binds, database.options)).rows;
     if(result.length > 0) return result[0];
     createNewProduct(productName, 'unspecified', null, null, null);
+    return (await database.execute(sql, binds, database.options)).rows;
 }
 
 async function createNewProduct(name, manufacturer, description, market_price_min, market_price_max){
@@ -34,8 +35,50 @@ async function createNewProduct(name, manufacturer, description, market_price_mi
     await database.execute(sql, binds, database.options);
 }
 
+async function getAllProducts(user_id){
+    const sql = 'SELECT PRODUCT_ID, NAME, MANUFACTURER, DESCRIPTION, MARKET_PRICE_MIN, MARKET_PRICE_MAX, HAS_WISHLISTED_PRODUCT(:u, PRODUCT_ID) AS HAS_WISHLISTED FROM PRODUCT';
+    const binds = {u: user_id};
+    return (await database.execute(sql, binds, database.options)).rows;
+}
+
+async function getAllTags(user_id){
+    const sql = 'SELECT TAG_ID, NAME, HAS_FOLLOWED_TAG(:u, TAG_ID) AS HAS_FOLLOWED FROM TAG'
+    const binds = {u: user_id};
+    return (await database.execute(sql, binds, database.options)).rows;
+}
+
+async function addToWishlist(user_id, product_id){
+    const sql = 'INSERT INTO WISHLIST VALUES(:u, :p)';
+    const binds = {u: user_id, p: product_id};
+    await database.execute(sql, binds, database.options);
+}
+
+async function removeFromWishlist(user_id, product_id){
+    const sql = 'DELETE FROM WISHLIST WHERE USER_ID = :u AND PRODUCT_ID = :p';
+    const binds = {u: user_id, p: product_id};
+    await database.execute(sql, binds, database.options);
+}
+
+async function addToFollow(user_id, tag_id){
+    const sql = 'INSERT INTO FOLLOW VALUES(:u, :t)';
+    const binds = {u: user_id, t: tag_id};
+    await database.execute(sql, binds, database.options);
+}
+
+async function removeFromFollow(user_id, tag_id){
+    const sql = 'DELETE FROM FOLLOW WHERE USER_ID = :u AND TAG_ID = :t';
+    const binds = {u: user_id, t: tag_id};
+    await database.execute(sql, binds, database.options);
+}
+
 module.exports = {
     getMostReviewedProducts,
     getProductInfoByName,
-    createNewProduct
+    createNewProduct,
+    getAllProducts,
+    getAllTags,
+    addToWishlist,
+    removeFromWishlist,
+    addToFollow,
+    removeFromFollow
 }
