@@ -12,21 +12,12 @@ router.get('/:option', async(req, res) =>{
     let _userInfo = await auth_api.getInfoById(req.session.user_id);
     let _posts = await user_api.getPostsByID(req.session.user_id);
     let _reviews = await user_api.getReviewsByID(req.session.user_id);
-    let _allProducts = await product_api.getAllProducts(req.session.user_id);
-    let _allTags = await product_api.getAllTags(req.session.user_id);
-    let _allSellTransactions = await user_api.getAllSellTransactions(req.session.user_id);
-    let _allBuyTransactions = await user_api.getAllBuyTransactions(req.session.user_id);
     
     const binds = {
         userInfo: _userInfo,
         posts: _posts,
         reviews: _reviews,
-        PageName: req.params.option,
-        reviews: _reviews,
-        allProducts: _allProducts,
-        allTags: _allTags,
-        allSellTransactions: _allSellTransactions,
-        allBuyTransactions: _allBuyTransactions
+        PageName: req.params.option
     };
 
     res.render('userProfilePage', binds);
@@ -48,24 +39,5 @@ router.post('/createpost', async(req, res) =>{
 
     await post_api.createNewPost(description, price, rem_quantity, negotiable, req.session.user_id, productID);
 });
-
-router.post('/togglewishlist', async(req, res) =>{
-    let product_id = req.body.PRODUCT_ID;
-    let hasWishlisted = req.body.HAS_WISHLISTED;
-    if(hasWishlisted == 1)
-        await product_api.addToWishlist(req.session.user_id, product_id);
-    else
-        await product_api.removeFromWishlist(req.session.user_id, product_id);
-});
-
-router.post('/togglefollow', async(req, res) =>{
-    let tag_id = req.body.TAG_ID;
-    let hasFollowd = req.body.HAS_FOLLOWED;
-    if(hasFollowd == 1)
-        await product_api.addToFollow(req.session.user_id, tag_id);
-    else
-        await product_api.removeFromFollow(req.session.user_id, tag_id);
-});
-
 
 module.exports = router;
