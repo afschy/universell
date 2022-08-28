@@ -2,8 +2,8 @@
 
 <div class="row m-5">
     <div class="col-4 text-center">
-        <img src="../images/post_placeholder.jpg" class="rounded" alt="..." style="height: 300px; width: 300px;">
-        <h2 class="mt-2" style="text-align: center;">Username</h2>
+        <img src=<%=userInfo[0].DP%> class="rounded" alt="..." style="height: 300px; width: 300px;">
+        <h2 class="mt-2" style="text-align: center;"><%=userInfo[0].NAME%></h2>
     </div>
     <div class="col-8">
         <div class="row text-center">
@@ -33,25 +33,25 @@
                     <h3 class="back-color-2 pt-3 pb-1 pl-2 m-0 col-12"> UPDATE INFO </h3>
                     <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> Email: </p>
                     <div class="col-8 p-2 back-color-2" style="width: 100%;">
-                        <input type="text" class="form-control input-lg" id="contactNo" placeholder="Search">
+                        <input type="text" class="form-control input-lg" id="email">
                     </div>
-                    <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> Contact No: </p>
+                    <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> New Password: </p>
                     <div class="col-8 p-2 back-color-2" style="width: 100%;">
-                        <input type="text" class="form-control input-lg" id="contactNo" placeholder="Search">
+                        <input type="text" class="form-control input-lg" id="password">
                     </div>
-                    <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> Contact No: </p>
+                    <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> Confirm New Password: </p>
                     <div class="col-8 p-2 back-color-2" style="width: 100%;">
-                        <input type="text" class="form-control input-lg" id="contactNo" placeholder="Search">
+                        <input type="text" class="form-control input-lg" id="confirm_password">
                     </div>
-                    <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> Contact No: </p>
+                    <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> New Profile Picture URL: </p>
                     <div class="col-8 p-2 back-color-2" style="width: 100%;">
-                        <input type="text" class="form-control input-lg" id="contactNo" placeholder="Search">
+                        <input type="text" class="form-control input-lg" id="profile_picture">
                     </div>  
                     <div class="col-9 back-color-2 pt-3 pb-1 pl-2 m-0">
 
                     </div>
                     <div class="col-3 back-color-2 pt-3 pb-1 pl-2 m-0">
-                        <button id="addReview" class="btn btn-dark btn-block">UPDATE</button>
+                        <button id="updateSettingsButton" class="btn btn-dark btn-block">UPDATE</button>
                     </div>
 
             <% } else if(PageName == "createpost") { %>
@@ -59,23 +59,27 @@
                 <h3 class="back-color-2 pt-3 pb-1 pl-2 m-0 col-12"> NEW POST DETAILS </h3>
                 <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> PRODUCT NAME: </p>
                 <div class="col-8 p-2 back-color-2" style="width: 100%;">
-                    <input id="productName" type="text" class="form-control input-lg" placeholder="Search">
+                    <input id="productName" type="text" class="form-control input-lg">
                 </div>
                 <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> DESCRIPTION: </p>
                 <div class="col-8 p-2 back-color-2" style="width: 100%;">
-                    <input id="productDescription" type="text" class="form-control input-lg" placeholder="Search">
+                    <input id="productDescription" type="text" class="form-control input-lg">
                 </div>
                 <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> QUANTITY: </p>
                 <div class="col-8 p-2 back-color-2" style="width: 100%;">
-                    <input id="productQuantity" type="text" class="form-control input-lg" placeholder="Search">
+                    <input id="productQuantity" type="text" class="form-control input-lg">
                 </div>
                 <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> NEGOTIABILITY: </p>
                 <div class="col-8 p-2 back-color-2" style="width: 100%;">
-                    <input id="productNegotiability" type="text" class="form-control input-lg" placeholder="Search">
+                    <input id="productNegotiability" type="text" class="form-control input-lg">
                 </div>  
                 <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> PRICE: </p>
                 <div class="col-8 p-2 back-color-2" style="width: 100%;">
-                    <input id="productPrice" type="text" class="form-control input-lg" placeholder="Search">
+                    <input id="productPrice" type="text" class="form-control input-lg">
+                </div>
+                <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> IMAGE URL(s): </p>
+                <div class="col-8 p-2 back-color-2" style="width: 100%;">
+                    <textarea id="imgUrl" class="form-control input-lg"></textarea>
                 </div>
                 <div class="col-9 back-color-2 pt-3 pb-1 pl-2 m-0">
 
@@ -140,25 +144,48 @@
 
 <script>
     $(`#createpost`).click(function (e) {
+        // e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: "/profile/createpost",
+            data: {
+                PRODUCTNAME: $(`#productName`).val(),
+                DESCRIPTION: $(`#productDescription`).val(),
+                REM_QUANTITY: $(`#productQuantity`).val(),
+                NEGOTIABLE: $(`#productNegotiability`).val(),
+                PRICE: $(`#productPrice`).val(),
+                IMG_URL: $(`#imgUrl`).val()
+            },
+            success: function (res) {
+                $(document).ajaxStop(function(){
+                    window.location.href = '/profile/posts';
+                });
+            },
+            error: function (result) {
+                alert('error');
+            }
+        });
+    });
+
+    $(`#updateSettingsButton`).click(function(e){
         e.preventDefault();
         $.ajax({
-        type: "POST",
-        url: "/profile/createpost",
-        data: {
-            PRODUCTNAME: $(`#productName`).val(),
-            DESCRIPTION: $(`#productDescription`).val(),
-            REM_QUANTITY: $(`#productQuantity`).val(),
-            NEGOTIABLE: $(`#productNegotiability`).val(),
-            PRICE: $(`#productPrice`).val()
-        },
-        success: function (res) {
-            $(document).ajaxStop(function(){
-                window.location.reload();
-            });
-        },
-        error: function (result) {
-            alert('error');
-        }
+            type: "POST",
+            url: "/profile/updateprofile",
+            data: {
+                EMAIL: $(`#email`).val(),
+                PASSWORD: $(`#password`).val(),
+                CONFIRM_PASSWORD: $(`#confirm_password`).val(),
+                PROFILE_PICTURE: $(`#profile_picture`).val()
+            },
+            success: function (res) {
+                $(document).ajaxStop(function(){
+                    window.location.reload();
+                });
+            },
+            error: function (result) {
+                alert('error');
+            }
         });
     });
 </script>

@@ -15,7 +15,7 @@ async function getNewPosts(offset, limit){
     FROM POST P
     JOIN PRODUCT PR ON P.PRODUCT_ID = PR.PRODUCT_ID
     JOIN USERS U ON P.POSTER_ID = U.USER_ID
-    ORDER BY P.TIME ASC
+    ORDER BY P.TIME DESC
     OFFSET :o ROWS
     FETCH FIRST :l ROWS ONLY
     `;
@@ -152,6 +152,12 @@ async function deletePost(post_id){
     await database.execute(sql, binds, database.options);
 }
 
+async function addPostImage(post_id, url){
+    const sql = 'INSERT INTO POSTIMAGE VALUES(:p, :u)';
+    const binds = {p: post_id, u: url};
+    await database.execute(sql, binds, database.options);
+}
+
 module.exports = {
     createNewPost,
     getNewPosts,
@@ -164,5 +170,6 @@ module.exports = {
     hasUpvotedPost,
     addUpvote,
     removeUpvote,
-    deletePost
+    deletePost,
+    addPostImage
 }

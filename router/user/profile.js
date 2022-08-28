@@ -38,13 +38,19 @@ router.post('/createpost', async(req, res) =>{
     let rem_quantity = req.body.REM_QUANTITY;
     let negotiable = req.body.NEGOTIABLE;
     let productName = req.body.PRODUCTNAME;
-    console.log(productName);
 
     let productInfo = await product_api.getProductInfoByName(productName);
-    console.log(productInfo);
     let productID = await productInfo.PRODUCT_ID;
 
     await post_api.createNewPost(description, price, rem_quantity, negotiable, req.session.user_id, productID);
+    let currPost = await post_api.getNewPosts(0, 1);
+    
+    let img = req.body.IMG_URL;
+    img = img.split(/\r?\n/);
+    for(let i=0; i<img.length; i++)
+        await post_api.addPostImage(currPost[0].POST_ID, img[i]);
+    
+    res.redirect('/profile/posts');
 });
 
 router.post('/togglewishlist', async(req, res) =>{
@@ -73,6 +79,17 @@ router.post('/deletepost', async(req, res) =>{
 router.post('/deletereview', async(req, res) =>{
     let review_id = req.body.REVIEW_ID;
     await review_api.deleteReview(review_id);
+});
+
+router.post('/updateprofile', async(req, res) =>{
+    let email = req.body.EMAIL;
+    let password = req.body.PASSWORD;
+    let confirm_password = req.body.CONFIRM_PASSWORD;
+    let profile_picture = req.body.PROFILE_PICTURE;
+    
+    if(email.length > 0) await auth_api.updateEmail(req.session.user_id, email);
+    if(password.length > 0 && password === confirm_password) await auth_api.changePassword(req.session.user_id, password);
+    if(profile_picture.length > 0) await auth_api.changeDP(req.session.user_id, profile_picture);
 });
 
 module.exports = router;

@@ -36,7 +36,7 @@ async function getPostsByID(poster_id){
     JOIN PRODUCT PR ON P.PRODUCT_ID = PR.PRODUCT_ID
     JOIN USERS U ON P.POSTER_ID = U.USER_ID
     WHERE P.POSTER_ID = :p
-    ORDER BY P.TIME ASC
+    ORDER BY P.TIME DESC
     `;
     const binds = {p: poster_id};
     return (await database.execute(sql, binds, database.options)).rows;

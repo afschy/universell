@@ -30,8 +30,41 @@ async function inputUser(password, name, email){
     await database.execute(sql, binds, database.options);
 }
 
+async function updateEmail(user_id, email){
+    const sql = `
+    UPDATE USERS
+    SET EMAIL = :e
+    WHERE USER_ID = :u
+    `;
+    const binds = {u: user_id, e: email};
+    await database.execute(sql, binds, database.options);
+}
+
+async function changePassword(user_id, password){
+    const sql = `
+    UPDATE USERS
+    SET PASSWORD = :p
+    WHERE USER_ID = :u
+    `;
+    const binds = {u: user_id, p: password};
+    await database.execute(sql, binds, database.options);
+}
+
+async function changeDP(user_id, dp){
+    const sql = `
+    UPDATE USERS
+    SET DP = :d
+    WHERE USER_ID = :u
+    `;
+    const binds = {u: user_id, d: dp};
+    await database.execute(sql, binds, database.options);
+}
+
 module.exports = {
     getInfoById,
     getInfoByEmail,
-    inputUser
+    inputUser,
+    updateEmail,
+    changePassword,
+    changeDP
 };
