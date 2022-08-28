@@ -106,12 +106,32 @@
     color: black;
   }
 
+  .upvote .upvoteoff2{
+    background-color: black; 
+    color: white;
+  }
+
+  .upvote .upvoteoff2:hover {
+    background-color:#0096FF ;
+    color: black;
+  }
+
   .upvote .upvoteon{
     background-color:orange ;
     color: black;
   }
 
   .upvote .upvoteon:hover{
+    background-color: black; 
+    color: white;
+  }
+
+  .upvote .upvoteon2{
+    background-color:#0096FF ;
+    color: black;
+  }
+
+  .upvote .upvoteon2:hover{
     background-color: black; 
     color: white;
   }

@@ -60,6 +60,7 @@ router.post('/togglewishlist', async(req, res) =>{
         await product_api.addToWishlist(req.session.user_id, product_id);
     else
         await product_api.removeFromWishlist(req.session.user_id, product_id);
+    res.redirect('/profile/wishlist');
 });
 
 router.post('/togglefollow', async(req, res) =>{
@@ -74,11 +75,13 @@ router.post('/togglefollow', async(req, res) =>{
 router.post('/deletepost', async(req, res) =>{
     let post_id = req.body.POST_ID;
     await post_api.deletePost(post_id);
+    res.redirect('/profile/posts');
 });
 
 router.post('/deletereview', async(req, res) =>{
     let review_id = req.body.REVIEW_ID;
     await review_api.deleteReview(review_id);
+    res.redirect('/profile/reviews');
 });
 
 router.post('/updateprofile', async(req, res) =>{
@@ -87,14 +90,18 @@ router.post('/updateprofile', async(req, res) =>{
     let confirm_password = req.body.CONFIRM_PASSWORD;
     let profile_picture = req.body.PROFILE_PICTURE;
     
+
+
     if(email.length > 0) await auth_api.updateEmail(req.session.user_id, email);
     if(password.length > 0 && password === confirm_password) await auth_api.changePassword(req.session.user_id, password);
     if(profile_picture.length > 0) await auth_api.changeDP(req.session.user_id, profile_picture);
+    res.redirect('/profile/settings');
 });
 
 router.post('/approve', async(req, res) =>{
     let order_id = req.body.ORDER_ID;
     await user_api.validateOrder(order_id);
+    res.redirect('/profile/selling');
 });
 
 module.exports = router;

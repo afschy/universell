@@ -2,12 +2,12 @@
 
 <div class="row m-5">
     <div class="col-4 text-center">
-        <img src=<%=userInfo[0].DP%> class="rounded" alt="..." style="height: 300px; width: 300px;">
-        <h2 class="mt-2" style="text-align: center;"><%=userInfo[0].NAME%></h2>
+        <% console.log(userInfo[0].DP); %> 
+        <img src=<%= userInfo[0].DP %>  class="rounded" alt="..." style="height: 300px; width: 300px;">
+        <h2 class="mt-2" style="text-align: center;"><%= userInfo[0].NAME %> </h2>
     </div>
-
-    <% console.log(allSellTransactions); %> 
-    <% console.log(allBuyTransactions); %>   
+  
+    
     <div class="col-8">
         <div class="row text-center">
             <div class="col-3">
@@ -47,11 +47,11 @@
             <div class="col-3">
                 <div class="row">
                     <div class="col-6 p-0">
-                        <a class="card-link link-color-1" href=""><h5 class="profile-nav">Buys</h5></a>
+                        <a class="card-link link-color-1" href="/profile/buying"><h5 class="profile-nav">Buying</h5></a>
                     </div>
 
                     <div class="col-6 p-0">
-                        <a class="card-link link-color-1" href=""><h5 class="profile-nav">Sells</h5></a>
+                        <a class="card-link link-color-1" href="/profile/selling"><h5 class="profile-nav">Selling</h5></a>
                     </div>
                 </div>
             </div>
@@ -63,28 +63,26 @@
                     <h3 class="back-color-2 pt-3 pb-1 pl-2 m-0 col-12"> UPDATE INFO </h3>
                     <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> Email: </p>
                     <div class="col-8 p-2 back-color-2" style="width: 100%;">
-                        <input type="text" class="form-control input-lg" id="email">
+                        <input id="userEmail" type="text" class="form-control input-lg" >
                     </div>
                     <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> New Password: </p>
                     <div class="col-8 p-2 back-color-2" style="width: 100%;">
-                        <input type="text" class="form-control input-lg" id="password">
+                        <input id="userPassword" type="password" class="form-control input-lg" >
                     </div>
                     <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> Confirm New Password: </p>
                     <div class="col-8 p-2 back-color-2" style="width: 100%;">
-                        <input type="text" class="form-control input-lg" id="confirm_password">
+                        <input id="userConfirmPassword" type="password" class="form-control input-lg" >
                     </div>
-<<<<<<< Updated upstream
+
                     <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> New Profile Picture URL: </p>
-=======
-                    <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> Profile Picture: </p>
->>>>>>> Stashed changes
                     <div class="col-8 p-2 back-color-2" style="width: 100%;">
-                        <input type="text" class="form-control input-lg" id="profile_picture">
-                    </div>  
+                        <input id="userProfilePicture" type="text" class="form-control input-lg" >
+                    </div>
+                    
                     <div class="col-9 back-color-2 pt-3 pb-1 pl-2 m-0">
 
                     </div>
-                    <div class="col-3 back-color-2 pt-3 pb-1 pl-2 m-0">
+                    <div class="col-3 back-color-2 pt-3 pb-3 pl-2 m-0">
                         <button id="updateSettingsButton" class="btn btn-dark btn-block">UPDATE</button>
                     </div>
 
@@ -97,7 +95,7 @@
                 </div>
                 <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> DESCRIPTION: </p>
                 <div class="col-8 p-2 back-color-2" style="width: 100%;">
-                    <input id="productDescription" type="text" class="form-control input-lg">
+                    <textarea id="productDescription" class="form-control input-lg" rows="4"></textarea>
                 </div>
                 <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> QUANTITY: </p>
                 <div class="col-8 p-2 back-color-2" style="width: 100%;">
@@ -113,17 +111,14 @@
                 </div>
                 <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> IMAGE URL(s): </p>
                 <div class="col-8 p-2 back-color-2" style="width: 100%;">
-                    <textarea id="imgUrl" class="form-control input-lg"></textarea>
-                </div>
-                <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> IMAGES: </p>
-                <div class="col-8 p-2 back-color-2" style="width: 100%;">
-                    <input id="productPrice" type="text" class="form-control input-lg" placeholder="Search">
+                    <textarea id="imgUrl" class="form-control input-lg" rows="4"></textarea>
                 </div>
                 <div class="col-9 back-color-2 pt-3 pb-1 pl-2 m-0">
 
                 </div>
-                <div class="col-3 back-color-2 pt-3 pb-1 pl-2 m-0">
+                <div class="col-3 back-color-2 pt-3 pb-3 pl-2 m-0">
                     <button id="createpost" class="btn btn-dark btn-block">ADD POST</button>
+                </div>
             <% } else if(PageName == "posts") { %>    
 
                         <% for(let i=0; i < posts.length; i++){ %>
@@ -142,7 +137,7 @@
                                     </div>
                                     <div class="col-4" >
                                         <div class="card-body" >
-                                            <button class="btn btn-dark btn-block pd-3" id=<%= "removeFromCart" + i %>>REMOVE POST</button>
+                                            <button class="btn btn-dark btn-block pd-3" id=<%= "removePost" + i %>>REMOVE POST</button>
                                         </div>
                                     </div>
                                 </div>
@@ -167,7 +162,7 @@
                                 <div class="card-body" >
                                     <% let route2 = "/posts/" +  reviews[i].POST_ID + "/postPage" %>
                                     <button class="btn btn-dark btn-block pd-3" > <a class="card-link" style="color: white  !important;" href=<%= route2 %>>VISIT POST</a> </button>
-                                    <button class="btn btn-dark btn-block pd-3" >REMOVE REVIEW</button>
+                                    <button class="btn btn-dark btn-block pd-3" id=<%= "removeReview" + i %>>REMOVE REVIEW</button>
                                 </div>
                             </div>
                         </div>
@@ -177,26 +172,104 @@
             <% } else if(PageName == "wishlist") { %>
 
                 <% for(let i=0; i < allProducts.length; i++){ %>
-                    <div class="card mb-3 back-color-1 shadow-lg" style="max-height: 220px; width: 100%;">
+                    <div class="card mb-3 back-color-1 shadow-lg col-12 p-2 m-3" style="max-height: 220px; width: 100%;">
                         <div class="row" >
                             <div class="col-8" >
-                                <p class="card-text"><%= allProducts[i].NAME %></p>
+                                <h3 class="card-text"><%= allProducts[i].NAME %></h3>
+                                <p class="card-text"><%= allProducts[i].MANUFACTURER %></p>
+                                <p class="card-text"><%= allProducts[i].DESCRIPTION %></p>
+                                <div class="row">
+                                    <p class="card-text col-6">Minimum Price : <%= allProducts[i].MARKET_PRICE_MIN %> Tk</p>
+                                    <p class="card-text col-6">Maximum Price : <%= allProducts[i].MARKET_PRICE_MAX %> Tk</p>
+                                </div>
                             </div>
-                            <div class="col-4" >
-                                
+                            <div class="card-body row col-4 upvote" style="height: 2em;">
+                                <button id=<%= "wishListButton" + i %> class="btn col-6 <% if(allProducts[i].HAS_WISHLISTED == 1) { %>  upvoteon2 <% } else { %> upvoteoff2 <% } %>"><i style="font-size: 20px;" class="fa-brands fa-gratipay pd-4"></i></button>
+                                <p class="col-6" style="font-size: 20px; text-align: center; padding: 0%; margin: 0%; border: solid black; border-width: 1px; border-radius: 0rem 0.25rem 0.25rem 0rem;">
+                                    <% if(allProducts[i].HAS_WISHLISTED == 1) { %>  
+                                        Followed 
+                                    <% } else { %> 
+                                        Unfollowed    
+                                    <% } %> 
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+                
+            <% } else if(PageName == "buying") { %>
+
+                <% for(let i=0; i < allBuyTransactions.length; i++){ %>
+                    <div class="card mb-3 back-color-1 shadow-lg col-12 p-2 m-3" style="max-height: 220px; width: 100%;">
+                        <div class="row" >
+                            <div class="col-8" >
+                                <h3 class="card-text"><%= allBuyTransactions[i].PRODUCT_NAME %></h3>
+                                <p class="card-text">Quantity : <%= allBuyTransactions[i].QUANTITY %></p>
+                                <small class="text-muted">Time : <%= allBuyTransactions[i].TIME %></small></p>
+                            </div>
+                            <div class="card-body row col-4 " style="height: 2em;">
+                                <p class="card-text">STATUS : <% if(allBuyTransactions[i].STATUS == 1) { %> APPROVED <% } else { %> WAITING <% } %>  </p>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+
+            <% } else if(PageName == "selling") { %>
+
+                <% for(let i=0; i < allSellTransactions.length; i++){ %>
+                    <div class="card mb-3 back-color-1 shadow-lg col-12 p-2 m-3" style="max-height: 220px; width: 100%;">
+                        <div class="row" >
+                            <div class="col-8" >
+                                <h3 class="card-text"><%= allSellTransactions[i].PRODUCT_NAME %></h3>
+                                <p class="card-text">Quantity : <%= allSellTransactions[i].QUANTITY %></p>
+                                <p class="card-text">Ordered By : <%= allSellTransactions[i].BUYER_NAME %></p>
+                                <small class="text-muted">Time : <%= allSellTransactions[i].TIME %></small></p>
+                            </div>
+                            <div class="card-body row col-4 " style="height: 2em;">
+                                <% if(allSellTransactions[i].STATUS == 1) { %> 
+                                    <p class="card-text text-center">STATUS : APPROVED  </p>
+                                <% } else { %> 
+                                    <button id=<%= "approveSellButton" + i %> class="btn btn-dark btn-block pd-3" >APPROVE</button>
+                                <% } %> 
                             </div>
                         </div>
                     </div>
                 <% } %>
                 
             <% } %> 
+
+            
+   
         </div>
     </div>
 </div>
 
 <script>
+    
+    $(`#updateSettingsButton`).click(function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: "/profile/updateprofile",
+            data: {
+                EMAIL: $(`#userEmail`).val(),
+                PASSWORD: $(`#userPassword`).val(),
+                CONFIRM_PASSWORD: $(`#userConfirmPassword`).val(),
+                PROFILE_PICTURE: $(`#userProfilePicture`).val(),
+            },
+            success: function (res) {
+                $(document).ajaxStop(function(){
+                    window.location.reload();
+                });
+            },
+            error: function (result) {
+                alert('error');
+            }
+        });
+    });
+
     $(`#createpost`).click(function (e) {
-        // e.preventDefault();
+        e.preventDefault();
         $.ajax({
             type: "POST",
             url: "/profile/createpost",
@@ -219,27 +292,102 @@
         });
     });
 
-    $(`#updateSettingsButton`).click(function(e){
-        e.preventDefault();
-        $.ajax({
-            type: "POST",
-            url: "/profile/updateprofile",
-            data: {
-                EMAIL: $(`#email`).val(),
-                PASSWORD: $(`#password`).val(),
-                CONFIRM_PASSWORD: $(`#confirm_password`).val(),
-                PROFILE_PICTURE: $(`#profile_picture`).val()
-            },
-            success: function (res) {
-                $(document).ajaxStop(function(){
-                    window.location.reload();
-                });
-            },
-            error: function (result) {
-                alert('error');
-            }
+
+    let posts = <%- JSON.stringify(posts) %>;
+
+    for (let i = 0; i < posts.length; i++) {
+        $(`#removePost${i}`).click(function(e){
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "/profile/deletepost",
+                data: {
+                    POST_ID : posts[i].POST_ID
+                },
+                success: function (res) {
+                    $(document).ajaxStop(function(){
+                        window.location.reload();
+                    });
+                },
+                error: function (result) {
+                    alert('error');
+                }
+            });
         });
-    });
+    }
+
+    let reviews = <%- JSON.stringify(reviews) %>;
+
+    for (let i = 0; i < reviews.length; i++) {
+        $(`#removeReview${i}`).click(function(e){
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "/profile/deletereview",
+                data: {
+                    REVIEW_ID : reviews[i].REVIEW_ID
+                },
+                success: function (res) {
+                    $(document).ajaxStop(function(){
+                        window.location.reload();
+                    });
+                },
+                error: function (result) {
+                    alert('error');
+                }
+            });
+        });
+    }
+
+    
+    let allProducts = <%- JSON.stringify(allProducts) %>;
+
+    for (let i = 0; i < allProducts.length; i++) {
+        $(`#wishListButton${i}`).click(function(e){
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "/profile/togglewishlist",
+                data: {
+                    PRODUCT_ID : allProducts[i].PRODUCT_ID,
+                    HAS_WISHLISTED : (allProducts[i].HAS_WISHLISTED + 1)%2
+                },
+                success: function (res) {
+                    $(document).ajaxStop(function(){
+                        window.location.reload();
+                    });
+                },
+                error: function (result) {
+                    alert('error');
+                }
+            });
+        });
+    }
+
+    
+    let allSellTransactions = <%- JSON.stringify(allSellTransactions) %>;
+
+    for (let i = 0; i < allSellTransactions.length; i++) {
+        $(`#approveSellButton${i}`).click(function(e){
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "/profile/approve",
+                data: {
+                    ORDER_ID : allSellTransactions[i].ORDER_ID
+                },
+                success: function (res) {
+                    $(document).ajaxStop(function(){
+                        window.location.reload();
+                    });
+                },
+                error: function (result) {
+                    alert('error');
+                }
+            });
+        });
+    }
+
 </script>
 
 
