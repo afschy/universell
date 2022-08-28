@@ -5,25 +5,55 @@
         <img src=<%=userInfo[0].DP%> class="rounded" alt="..." style="height: 300px; width: 300px;">
         <h2 class="mt-2" style="text-align: center;"><%=userInfo[0].NAME%></h2>
     </div>
+
+    <% console.log(allSellTransactions); %> 
+    <% console.log(allBuyTransactions); %>   
     <div class="col-8">
         <div class="row text-center">
-            <div class="col-2 ">
-                <a class="card-link link-color-1" href="/profile/settings"><h4 class="profile-nav">Settings</h4></a>
+            <div class="col-3">
+                <div class="row">
+                    <div class="col-6 p-0">
+                        <a class="card-link link-color-1" href="/profile/settings"><h5 class="profile-nav">Settings</h5></a>
+                    </div>
+                    <div class="col-6 p-0">
+                        <a class="card-link link-color-1" href="/profile/createpost"><h5 class="profile-nav">New Post</h5></a>
+                    </div>
+                </div>
             </div>
-            <div class="col-2">
-                <a class="card-link link-color-1" href="/profile/createpost"><h4 class="profile-nav">New Post</h4></a>
+            
+            <div class="col-3">
+                <div class="row">
+                    <div class="col-6 link-color-1 p-0">
+                        <a class="card-link link-color-1" href="/profile/posts"> <h5 class="profile-nav">Posts</h5></a>
+                    </div>
+                    <div class="col-6 p-0">
+                        <a class="card-link link-color-1" href="/profile/reviews"><h5 class="profile-nav">Reviews</h5></a>
+                    </div>
+                </div>
             </div>
-            <div class="col-2 link-color-1">
-                <a class="card-link link-color-1" href="/profile/posts"> <h4 class="profile-nav">Posts</h4></a>
+
+            <div class="col-3">
+                <div class="row">
+                    <div class="col-6 p-0">
+                        <a class="card-link link-color-1" href="/profile/wishlist"><h5 class="profile-nav">Wishlist</h5></a>
+                    </div>
+                    <div class="col-6 p-0">
+                        <a class="card-link link-color-1" href=""><h5 class="profile-nav">Tags</h5></a>
+                    </div>
+                </div>
             </div>
-            <div class="col-2">
-                <a class="card-link link-color-1" href="/profile/reviews"><h4 class="profile-nav">Reviews</h4></a>
-            </div>
-            <div class="col-2">
-                <h4 class="profile-nav">Settings</h4>
-            </div>
-            <div class="col-2">
-                <h4 class="profile-nav">Settings</h4>
+
+
+            <div class="col-3">
+                <div class="row">
+                    <div class="col-6 p-0">
+                        <a class="card-link link-color-1" href=""><h5 class="profile-nav">Buys</h5></a>
+                    </div>
+
+                    <div class="col-6 p-0">
+                        <a class="card-link link-color-1" href=""><h5 class="profile-nav">Sells</h5></a>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -43,7 +73,11 @@
                     <div class="col-8 p-2 back-color-2" style="width: 100%;">
                         <input type="text" class="form-control input-lg" id="confirm_password">
                     </div>
+<<<<<<< Updated upstream
                     <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> New Profile Picture URL: </p>
+=======
+                    <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> Profile Picture: </p>
+>>>>>>> Stashed changes
                     <div class="col-8 p-2 back-color-2" style="width: 100%;">
                         <input type="text" class="form-control input-lg" id="profile_picture">
                     </div>  
@@ -81,14 +115,17 @@
                 <div class="col-8 p-2 back-color-2" style="width: 100%;">
                     <textarea id="imgUrl" class="form-control input-lg"></textarea>
                 </div>
+                <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> IMAGES: </p>
+                <div class="col-8 p-2 back-color-2" style="width: 100%;">
+                    <input id="productPrice" type="text" class="form-control input-lg" placeholder="Search">
+                </div>
                 <div class="col-9 back-color-2 pt-3 pb-1 pl-2 m-0">
 
                 </div>
                 <div class="col-3 back-color-2 pt-3 pb-1 pl-2 m-0">
                     <button id="createpost" class="btn btn-dark btn-block">ADD POST</button>
-            <% } else if(PageName == "posts") { %>
-            
-                    
+            <% } else if(PageName == "posts") { %>    
+
                         <% for(let i=0; i < posts.length; i++){ %>
                             <div class="card mb-3 back-color-1 shadow-lg" style="max-height: 220px; width: 100%;">
                                 <div class="row" >
@@ -137,6 +174,21 @@
                     </div>
                 <% } %>
 
+            <% } else if(PageName == "wishlist") { %>
+
+                <% for(let i=0; i < allProducts.length; i++){ %>
+                    <div class="card mb-3 back-color-1 shadow-lg" style="max-height: 220px; width: 100%;">
+                        <div class="row" >
+                            <div class="col-8" >
+                                <p class="card-text"><%= allProducts[i].NAME %></p>
+                            </div>
+                            <div class="col-4" >
+                                
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+                
             <% } %> 
         </div>
     </div>
