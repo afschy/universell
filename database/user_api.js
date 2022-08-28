@@ -68,7 +68,13 @@ async function getAllSellTransactions(user_id){
 }
 
 async function getAllBuyTransactions(user_id){
-    const sql = 'SELECT * FROM TRANSACTION WHERE USER_ID = :u';
+    const sql = `
+    SELECT ORDER_ID, T.TIME AS TIME, T.POST_ID AS POST_ID, QUANTITY, STATUS, AMOUNT, PHONE, ADDRESS, PR.NAME AS PRODUCT_NAME
+    FROM TRANSACTION T
+    JOIN POST P ON T.POST_ID = P.POST_ID
+    JOIN PRODUCT PR ON P.PRODUCT_ID = PR.PRODUCT_ID
+    WHERE T.USER_ID = :u
+    `;
     const binds = {u: user_id};
     return (await database.execute(sql, binds, database.options)).rows;
 }
