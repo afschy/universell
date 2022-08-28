@@ -73,11 +73,22 @@ async function getAllBuyTransactions(user_id){
     return (await database.execute(sql, binds, database.options)).rows;
 }
 
+async function validateOrder(order_id){
+    const sql = `
+    UPDATE TRANSACTION
+    SET STATUS = 1
+    WHERE ORDER_ID = :o
+    `;
+    const binds = {o: order_id};
+    await database.execute(sql, binds, database.options);
+}
+
 module.exports = {
     getTopSellers,
     getStarSellers,
     getPostsByID,
     getReviewsByID,
     getAllSellTransactions,
-    getAllBuyTransactions
+    getAllBuyTransactions,
+    validateOrder
 }

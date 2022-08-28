@@ -92,4 +92,9 @@ router.post('/updateprofile', async(req, res) =>{
     if(profile_picture.length > 0) await auth_api.changeDP(req.session.user_id, profile_picture);
 });
 
+router.post('/approve', async(req, res) =>{
+    let order_id = req.body.ORDER_ID;
+    await user_api.validateOrder(order_id);
+});
+
 module.exports = router;
