@@ -44,9 +44,16 @@ async function removeUpvote(user_id, review_id){
     await database.execute(sql, binds, database.options);
 }
 
+async function deleteReview(review_id){
+    const sql = 'DELETE FROM REVIEW WHERE REVIEW_ID = :r';
+    const binds = {r: review_id};
+    await database.execute(sql, binds, database.options);
+}
+
 module.exports = {
     getAllReviewsForPost,
     addReview,
     addUpvote,
-    removeUpvote
+    removeUpvote,
+    deleteReview
 }

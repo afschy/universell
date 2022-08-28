@@ -146,6 +146,12 @@ async function removeUpvote(user_id, post_id){
     await database.execute(sql, binds, database.options);
 }
 
+async function deletePost(post_id){
+    const sql = 'DELETE FROM POST WHERE POST_ID = :p';
+    const binds = {p: post_id};
+    await database.execute(sql, binds, database.options);
+}
+
 module.exports = {
     createNewPost,
     getNewPosts,
@@ -157,5 +163,6 @@ module.exports = {
     getImages,
     hasUpvotedPost,
     addUpvote,
-    removeUpvote
+    removeUpvote,
+    deletePost
 }

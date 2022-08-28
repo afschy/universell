@@ -26,7 +26,6 @@
                 <h4 class="profile-nav">Settings</h4>
             </div>
         </div>
-        <%= console.log(reviews) %> 
 
         <div class="row text-center p-4 mt-3" style="border: solid black; border-width: 0.25em; border-radius: 0.25;">
             <% if(PageName == "settings") { %>
@@ -142,7 +141,6 @@
 <script>
     $(`#createpost`).click(function (e) {
         e.preventDefault();
-        console.log(event.target.id);
         $.ajax({
         type: "POST",
         url: "/profile/createpost",

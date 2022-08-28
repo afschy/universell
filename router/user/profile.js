@@ -7,6 +7,7 @@ const product_api = require('../../database/product_api');
 const post_api = require('../../database/post_api');
 const auth_api = require('../../database/auth_api');
 const user_api = require('../../database/user_api');
+const review_api = require('../../database/review_api');
 
 router.get('/:option', async(req, res) =>{
     let _userInfo = await auth_api.getInfoById(req.session.user_id);
@@ -31,8 +32,6 @@ router.get('/:option', async(req, res) =>{
     res.render('userProfilePage', binds);
 });
 
-
-
 router.post('/createpost', async(req, res) =>{
     let description = req.body.DESCRIPTION;
     let price = req.body.PRICE;
@@ -47,7 +46,6 @@ router.post('/createpost', async(req, res) =>{
 
     await post_api.createNewPost(description, price, rem_quantity, negotiable, req.session.user_id, productID);
 });
-
 
 router.post('/togglewishlist', async(req, res) =>{
     let product_id = req.body.PRODUCT_ID;
@@ -67,5 +65,14 @@ router.post('/togglefollow', async(req, res) =>{
         await product_api.removeFromFollow(req.session.user_id, tag_id);
 });
 
+router.post('/deletepost', async(req, res) =>{
+    let post_id = req.body.POST_ID;
+    await post_api.deletePost(post_id);
+});
+
+router.post('/deletereview', async(req, res) =>{
+    let review_id = req.body.REVIEW_ID;
+    await review_api.deleteReview(review_id);
+});
 
 module.exports = router;

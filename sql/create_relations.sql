@@ -27,7 +27,7 @@ CREATE TABLE ReviewUpvote(
 
 CREATE TABLE ProductImage(
 	product_id NUMBER NOT NULL,
-	image VARCHAR(100) NOT NULL,
+	image VARCHAR(500) NOT NULL,
 	
 	CONSTRAINT productimage_pk PRIMARY KEY(product_id, image),
 	CONSTRAINT productimage_product_fk FOREIGN KEY(product_id) REFERENCES Product(product_id)
@@ -35,7 +35,7 @@ CREATE TABLE ProductImage(
 
 CREATE TABLE PostImage(
 	post_id NUMBER NOT NULL,
-	image VARCHAR(100) NOT NULL,
+	image VARCHAR(500) NOT NULL,
 	
 	CONSTRAINT postimage_pk PRIMARY KEY(post_id, image),
 	CONSTRAINT postimage_post_fk FOREIGN KEY(post_id) REFERENCES Post(post_id)
