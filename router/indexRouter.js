@@ -9,6 +9,7 @@ const cartRouter = require('./user/cart');
 const postsRouter = require('./general/posts');
 const reviewRouter = require('./general/review');
 const cmntRouter = require('./general/cmnt');
+const searchRouter = require('./general/search');
 
 const user_api = require('../database/user_api');
 const post_api = require('../database/post_api');
@@ -57,5 +58,6 @@ router.use('/cart', cartRouter);
 router.use('/posts', postsRouter);
 router.use('/review', reviewRouter);
 router.use('/cmnt', cmntRouter);
+router.use('/search', searchRouter);
 
 module.exports = router;

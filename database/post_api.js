@@ -158,6 +158,34 @@ async function addPostImage(post_id, url){
     await database.execute(sql, binds, database.options);
 }
 
+async function searchForPost(text, sortBy, sortType){
+    text = text.toLowerCase();
+    let sql = `
+    SELECT P.POST_ID AS POST_ID, P.DESCRIPTION AS DESCRIPTION, P.NEGOTIABLE AS NEGOTIABLE, U.NAME AS SELLERNAME, P.PRICE AS PRICE, PR.NAME AS PRODUCTNAME,
+    P.REM_QUANTITY AS REMAINING, P.TIME AS TIME, GET_UPVOTE_COUNT(P.POST_ID) AS UPVOTECOUNT
+    FROM POST P
+    JOIN PRODUCT PR ON P.PRODUCT_ID = PR.PRODUCT_ID
+    JOIN USERS U ON U.USER_ID = P.POSTER_ID
+    WHERE LOWER(PR.NAME) LIKE ` + `'%` + text + `%'` + ` ORDER BY ` + sortBy + ` ` + sortType;
+    let binds = {};
+    let _productMatch = (await database.execute(sql, binds, database.options)).rows;
+
+    sql = `
+    SELECT P.POST_ID AS POST_ID, P.DESCRIPTION AS DESCRIPTION, P.NEGOTIABLE AS NEGOTIABLE, U.NAME AS SELLERNAME, P.PRICE AS PRICE, PR.NAME AS PRODUCTNAME,
+    P.REM_QUANTITY AS REMAINING, P.TIME AS TIME, GET_UPVOTE_COUNT(P.POST_ID) AS UPVOTECOUNT
+    FROM POST P
+    JOIN PRODUCT PR ON P.PRODUCT_ID = PR.PRODUCT_ID
+    JOIN USERS U ON U.USER_ID = P.POSTER_ID
+    WHERE LOWER(P.DESCRIPTION) LIKE ` + `'%` + text + `%'` + ` ORDER BY ` + sortBy + ` ` + sortType;
+    let _descriptionMatch = (await database.execute(sql, binds, database.options)).rows;
+
+    let result = {
+        productMatch: _productMatch,
+        descriptionMatch: _descriptionMatch
+    };
+    return result;
+}
+
 module.exports = {
     createNewPost,
     getNewPosts,
@@ -171,5 +199,6 @@ module.exports = {
     addUpvote,
     removeUpvote,
     deletePost,
-    addPostImage
+    addPostImage,
+    searchForPost
 }
