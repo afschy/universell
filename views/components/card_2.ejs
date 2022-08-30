@@ -11,7 +11,7 @@
     
     <% for(let i=0; i < topSellers.length; i++){ %>
     <li class="list-group-item">
-      <a href="#" class="card-link link-secondary">
+      <a href="/otherprofile/<%=topSellers[i].USER_ID%>/posts" class="card-link link-secondary">
         <%=topSellers[i].USERNAME%>, Sell Count = <%=topSellers[i].SOLDNUM%>
       </a>
     </li>
@@ -31,7 +31,7 @@
     
     <% for(let i=0; i < starSellers.length; i++){ %>
     <li class="list-group-item">
-      <a href="#" class="card-link link-secondary">
+      <a href="/otherprofile/<%=starSellers[i].USER_ID%>/posts" class="card-link link-secondary">
         <%=starSellers[i].USERNAME%>, Avg Stars = <%=starSellers[i].STARS%>
       </a>
     </li>
@@ -52,7 +52,7 @@
 
     <% for(let i=0; i < newPosts.length; i++){ %>
     <li class="list-group-item">
-      <a href="#" class="card-link">
+      <a href="/posts/<%=newPosts[i].POST_ID%>/option" class="card-link">
         <p>Product Name: <%=newPosts[i].PRODUCTNAME%></p>
         <P>Seller: <%=newPosts[i].USERNAME%></P>
         <P>Price: <%=newPosts[i].PRICE%></P>
@@ -77,7 +77,7 @@
 
     <% for(let i=0; i < mostReviewdPosts.length; i++){ %>
     <li class="list-group-item">
-      <a href="#" class="card-link">
+      <a href="/posts/<%=mostReviewdPosts[i].POST_ID%>/option" class="card-link">
         <p>Product Name: <%=mostReviewdPosts[i].PRODUCTNAME%></p>
         <P>Seller: <%=mostReviewdPosts[i].USERNAME%></P>
         <P>Price: <%=mostReviewdPosts[i].PRICE%></P>

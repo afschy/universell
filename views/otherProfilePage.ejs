@@ -2,7 +2,7 @@
 
 <div class="row m-5">
     <div class="col-4 text-center">
-        <% console.log(userInfo[0].DP); %> 
+        <!-- <% console.log(userInfo[0].DP); %>  -->
         <img src=<%= userInfo[0].DP %>  class="rounded" alt="..." style="height: 300px; width: 300px;">
         <h2 class="mt-2" style="text-align: center;"><%= userInfo[0].NAME %> </h2>
     </div>
@@ -10,139 +10,43 @@
     
     <div class="col-8">
         <div class="row text-center">
-            <div class="col-3">
-                <div class="row">
-                    <div class="col-6 p-0">
-                        <a class="card-link link-color-1" href="/profile/settings"><h5 class="profile-nav">Settings</h5></a>
-                    </div>
-                    <div class="col-6 p-0">
-                        <a class="card-link link-color-1" href="/profile/createpost"><h5 class="profile-nav">New Post</h5></a>
-                    </div>
-                </div>
-            </div>
             
             <div class="col-3">
                 <div class="row">
                     <div class="col-6 link-color-1 p-0">
-                        <a class="card-link link-color-1" href="/profile/posts"> <h5 class="profile-nav">Posts</h5></a>
+                        <a class="card-link link-color-1" href="/otherprofile/<%=userInfo[0].USER_ID%>/posts"> <h5 class="profile-nav">Posts</h5></a>
                     </div>
                     <div class="col-6 p-0">
-                        <a class="card-link link-color-1" href="/profile/reviews"><h5 class="profile-nav">Reviews</h5></a>
+                        <a class="card-link link-color-1" href="/otherprofile/<%=userInfo[0].USER_ID%>/reviews"><h5 class="profile-nav">Reviews</h5></a>
                     </div>
                 </div>
             </div>
-
-            <div class="col-3">
-                <div class="row">
-                    <div class="col-6 p-0">
-                        <a class="card-link link-color-1" href="/profile/wishlist"><h5 class="profile-nav">Wishlist</h5></a>
-                    </div>
-                    <div class="col-6 p-0">
-                        <a class="card-link link-color-1" href=""><h5 class="profile-nav">Tags</h5></a>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="col-3">
-                <div class="row">
-                    <div class="col-6 p-0">
-                        <a class="card-link link-color-1" href="/profile/buying"><h5 class="profile-nav">Buying</h5></a>
-                    </div>
-
-                    <div class="col-6 p-0">
-                        <a class="card-link link-color-1" href="/profile/selling"><h5 class="profile-nav">Selling</h5></a>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <div class="row text-center p-4 mt-3" style="border: solid black; border-width: 0.25em; border-radius: 0.25;">
-            <% if(PageName == "settings") { %>
+            <% if(PageName == "posts") { %>    
 
-                    <h3 class="back-color-2 pt-3 pb-1 pl-2 m-0 col-12"> UPDATE INFO </h3>
-                    <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> Email: </p>
-                    <div class="col-8 p-2 back-color-2" style="width: 100%;">
-                        <input id="userEmail" type="text" class="form-control input-lg" >
-                    </div>
-                    <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> New Password: </p>
-                    <div class="col-8 p-2 back-color-2" style="width: 100%;">
-                        <input id="userPassword" type="password" class="form-control input-lg" >
-                    </div>
-                    <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> Confirm New Password: </p>
-                    <div class="col-8 p-2 back-color-2" style="width: 100%;">
-                        <input id="userConfirmPassword" type="password" class="form-control input-lg" >
-                    </div>
-
-                    <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> New Profile Picture URL: </p>
-                    <div class="col-8 p-2 back-color-2" style="width: 100%;">
-                        <input id="userProfilePicture" type="text" class="form-control input-lg" >
-                    </div>
-                    
-                    <div class="col-9 back-color-2 pt-3 pb-1 pl-2 m-0">
-
-                    </div>
-                    <div class="col-3 back-color-2 pt-3 pb-3 pl-2 m-0">
-                        <button id="updateSettingsButton" class="btn btn-dark btn-block">UPDATE</button>
-                    </div>
-
-            <% } else if(PageName == "createpost") { %>
-                
-                <h3 class="back-color-2 pt-3 pb-1 pl-2 m-0 col-12"> NEW POST DETAILS </h3>
-                <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> PRODUCT NAME: </p>
-                <div class="col-8 p-2 back-color-2" style="width: 100%;">
-                    <input id="productName" type="text" class="form-control input-lg">
-                </div>
-                <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> DESCRIPTION: </p>
-                <div class="col-8 p-2 back-color-2" style="width: 100%;">
-                    <textarea id="productDescription" class="form-control input-lg" rows="4"></textarea>
-                </div>
-                <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> QUANTITY: </p>
-                <div class="col-8 p-2 back-color-2" style="width: 100%;">
-                    <input id="productQuantity" type="text" class="form-control input-lg">
-                </div>
-                <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> NEGOTIABILITY: </p>
-                <div class="col-8 p-2 back-color-2" style="width: 100%;">
-                    <input id="productNegotiability" type="text" class="form-control input-lg">
-                </div>  
-                <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> PRICE: </p>
-                <div class="col-8 p-2 back-color-2" style="width: 100%;">
-                    <input id="productPrice" type="text" class="form-control input-lg">
-                </div>
-                <p class="back-color-2 pt-3 pb-1 pl-2 m-0 col-4"> IMAGE URL(s): </p>
-                <div class="col-8 p-2 back-color-2" style="width: 100%;">
-                    <textarea id="imgUrl" class="form-control input-lg" rows="4"></textarea>
-                </div>
-                <div class="col-9 back-color-2 pt-3 pb-1 pl-2 m-0">
-
-                </div>
-                <div class="col-3 back-color-2 pt-3 pb-3 pl-2 m-0">
-                    <button id="createpost" class="btn btn-dark btn-block">ADD POST</button>
-                </div>
-            <% } else if(PageName == "posts") { %>    
-
-                        <% for(let i=0; i < posts.length; i++){ %>
-                            <div class="card mb-3 back-color-1 shadow-lg" style="max-height: 220px; width: 100%;">
-                                <div class="row" >
-                                    <div class="col-3" style="height: 100%;">
-                                        <img src=<%=posts[i].IMG%> class="card-img" style="height: 100%; width: 220px;" alt="...">
-                                    </div>
-                                    <div class="col-5" >
-                                        <div class="card-body" >
-                                            <% let route1 = "/posts/" +  posts[i].POST_ID + "/postPage" %> 
-                                            <a class="card-link" href= <%= route1 %>><h3 class="card-title pd-5"><%= posts[i].PRODUCTNAME %></h3></a>
-                                            <p class="card-text"><%= posts[i].DESCRIPTION %></p>
-                                            <small class="text-muted">Units Remaining: <%= posts[i].REMAINING %></small></p>
-                                        </div>
-                                    </div>
-                                    <div class="col-4" >
-                                        <div class="card-body" >
-                                            <button class="btn btn-dark btn-block pd-3" id=<%= "removePost" + i %>>REMOVE POST</button>
-                                        </div>
-                                    </div>
+                <% for(let i=0; i < posts.length; i++){ %>
+                    <div class="card mb-3 back-color-1 shadow-lg" style="max-height: 220px; width: 100%;">
+                        <div class="row" >
+                            <div class="col-3" style="height: 100%;">
+                                <img src=<%=posts[i].IMG%> class="card-img" style="height: 100%; width: 220px;" alt="...">
+                            </div>
+                            <div class="col-5" >
+                                <div class="card-body" >
+                                    <% let route1 = "/posts/" +  posts[i].POST_ID + "/postPage" %> 
+                                    <a class="card-link" href= <%= route1 %>><h3 class="card-title pd-5"><%= posts[i].PRODUCTNAME %></h3></a>
+                                    <p class="card-text"><%= posts[i].DESCRIPTION %></p>
+                                    <small class="text-muted">Units Remaining: <%= posts[i].REMAINING %></small></p>
                                 </div>
                             </div>
-                        <% } %> 
+                            <div class="col-4" >
+                                <div class="card-body" >
+                                    <!-- <button class="btn btn-dark btn-block pd-3" id=<%= "removePost" + i %>>REMOVE POST</button> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% } %> 
                     
             <% } else if(PageName == "reviews") { %>
 
@@ -162,84 +66,13 @@
                                 <div class="card-body" >
                                     <% let route2 = "/posts/" +  reviews[i].POST_ID + "/postPage" %>
                                     <button class="btn btn-dark btn-block pd-3" > <a class="card-link" style="color: white  !important;" href=<%= route2 %>>VISIT POST</a> </button>
-                                    <button class="btn btn-dark btn-block pd-3" id=<%= "removeReview" + i %>>REMOVE REVIEW</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 <% } %>
 
-            <% } else if(PageName == "wishlist") { %>
-
-                <% for(let i=0; i < allProducts.length; i++){ %>
-                    <div class="card mb-3 back-color-1 shadow-lg col-12 p-2 m-3" style="max-height: 220px; width: 100%;">
-                        <div class="row" >
-                            <div class="col-8" >
-                                <h3 class="card-text"><%= allProducts[i].NAME %></h3>
-                                <p class="card-text"><%= allProducts[i].MANUFACTURER %></p>
-                                <p class="card-text"><%= allProducts[i].DESCRIPTION %></p>
-                                <div class="row">
-                                    <p class="card-text col-6">Minimum Price : <%= allProducts[i].MARKET_PRICE_MIN %> Tk</p>
-                                    <p class="card-text col-6">Maximum Price : <%= allProducts[i].MARKET_PRICE_MAX %> Tk</p>
-                                </div>
-                            </div>
-                            <div class="card-body row col-4 upvote" style="height: 2em;">
-                                <button id=<%= "wishListButton" + i %> class="btn col-6 <% if(allProducts[i].HAS_WISHLISTED == 1) { %>  upvoteon2 <% } else { %> upvoteoff2 <% } %>"><i style="font-size: 20px;" class="fa-brands fa-gratipay pd-4"></i></button>
-                                <p class="col-6" style="font-size: 20px; text-align: center; padding: 0%; margin: 0%; border: solid black; border-width: 1px; border-radius: 0rem 0.25rem 0.25rem 0rem;">
-                                    <% if(allProducts[i].HAS_WISHLISTED == 1) { %>  
-                                        Followed 
-                                    <% } else { %> 
-                                        Unfollowed    
-                                    <% } %> 
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                <% } %>
-                
-            <% } else if(PageName == "buying") { %>
-
-                <% for(let i=0; i < allBuyTransactions.length; i++){ %>
-                    <div class="card mb-3 back-color-1 shadow-lg col-12 p-2 m-3" style="max-height: 220px; width: 100%;">
-                        <div class="row" >
-                            <div class="col-8" >
-                                <h3 class="card-text"><%= allBuyTransactions[i].PRODUCT_NAME %></h3>
-                                <p class="card-text">Quantity : <%= allBuyTransactions[i].QUANTITY %></p>
-                                <small class="text-muted">Time : <%= allBuyTransactions[i].TIME %></small></p>
-                            </div>
-                            <div class="card-body row col-4 " style="height: 2em;">
-                                <p class="card-text">STATUS : <% if(allBuyTransactions[i].STATUS == 1) { %> APPROVED <% } else { %> WAITING <% } %>  </p>
-                            </div>
-                        </div>
-                    </div>
-                <% } %>
-
-            <% } else if(PageName == "selling") { %>
-
-                <% for(let i=0; i < allSellTransactions.length; i++){ %>
-                    <div class="card mb-3 back-color-1 shadow-lg col-12 p-2 m-3" style="max-height: 220px; width: 100%;">
-                        <div class="row" >
-                            <div class="col-8" >
-                                <h3 class="card-text"><%= allSellTransactions[i].PRODUCT_NAME %></h3>
-                                <p class="card-text">Quantity : <%= allSellTransactions[i].QUANTITY %></p>
-                                <p class="card-text">Ordered By : <%= allSellTransactions[i].BUYER_NAME %></p>
-                                <small class="text-muted">Time : <%= allSellTransactions[i].TIME %></small></p>
-                            </div>
-                            <div class="card-body row col-4 " style="height: 2em;">
-                                <% if(allSellTransactions[i].STATUS == 1) { %> 
-                                    <p class="card-text text-center">STATUS : APPROVED  </p>
-                                <% } else { %> 
-                                    <button id=<%= "approveSellButton" + i %> class="btn btn-dark btn-block pd-3" >APPROVE</button>
-                                <% } %> 
-                            </div>
-                        </div>
-                    </div>
-                <% } %>
-                
-            <% } %> 
-
-            
-   
+            <% } %>
         </div>
     </div>
 </div>

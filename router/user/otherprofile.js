@@ -23,7 +23,7 @@ router.get('/:user_id/:option', async(req, res) =>{
         PageName: req.params.option
     };
 
-    res.render('userProfilePage', binds);
+    res.render('otherProfilePage', binds);
 });
 
 module.exports = router;
