@@ -14,10 +14,10 @@
             <div class="col-3">
                 <div class="row">
                     <div class="col-6 link-color-1 p-0">
-                        <a class="card-link link-color-1" href="/otherprofile/<%=userInfo[0].USER_ID%>/posts"> <h5 class="profile-nav">Posts</h5></a>
+                        <a class="card-link hlink-1 link-color-1" href="/otherprofile/<%=userInfo[0].USER_ID%>/posts"> <h5 class="profile-nav">Posts</h5></a>
                     </div>
                     <div class="col-6 p-0">
-                        <a class="card-link link-color-1" href="/otherprofile/<%=userInfo[0].USER_ID%>/reviews"><h5 class="profile-nav">Reviews</h5></a>
+                        <a class="card-link hlink-1 link-color-1" href="/otherprofile/<%=userInfo[0].USER_ID%>/reviews"><h5 class="profile-nav">Reviews</h5></a>
                     </div>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                             <div class="col-5" >
                                 <div class="card-body" >
                                     <% let route1 = "/posts/" +  posts[i].POST_ID + "/postPage" %> 
-                                    <a class="card-link" href= <%= route1 %>><h3 class="card-title pd-5"><%= posts[i].PRODUCTNAME %></h3></a>
+                                    <a class="card-link hlink-1" href= <%= route1 %>><h3 class="card-title pd-5"><%= posts[i].PRODUCTNAME %></h3></a>
                                     <p class="card-text"><%= posts[i].DESCRIPTION %></p>
                                     <small class="text-muted">Units Remaining: <%= posts[i].REMAINING %></small></p>
                                 </div>
