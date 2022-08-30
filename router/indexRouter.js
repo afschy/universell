@@ -10,6 +10,7 @@ const postsRouter = require('./general/posts');
 const reviewRouter = require('./general/review');
 const cmntRouter = require('./general/cmnt');
 const searchRouter = require('./general/search');
+const otherProfileRouter = require('./user/otherprofile');
 
 const user_api = require('../database/user_api');
 const post_api = require('../database/post_api');
@@ -60,5 +61,6 @@ router.use('/posts', postsRouter);
 router.use('/review', reviewRouter);
 router.use('/cmnt', cmntRouter);
 router.use('/search', searchRouter);
+router.use('/otherprofile', otherProfileRouter);
 
 module.exports = router;

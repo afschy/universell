@@ -1,0 +1,86 @@
+<%- include('components/header'); -%>
+
+<div class="row m-5">
+    <div class="col-4 text-center">
+        <!-- <% console.log(userInfo[0].DP); %>  -->
+        <img src=<%= userInfo[0].DP %>  class="rounded" alt="..." style="height: 300px; width: 300px;">
+        <h2 class="mt-2" style="text-align: center;"><%= userInfo[0].NAME %> </h2>
+    </div>
+  
+    
+    <div class="col-8">
+        <div class="row text-center">
+            
+            <div class="col-3">
+                <div class="row">
+                    <div class="col-6 link-color-1 p-0">
+                        <a class="card-link link-color-1" href="/otherprofile/<%=userInfo[0].USER_ID%>/posts"> <h5 class="profile-nav">Posts</h5></a>
+                    </div>
+                    <div class="col-6 p-0">
+                        <a class="card-link link-color-1" href="/otherprofile/<%=userInfo[0].USER_ID%>/reviews"><h5 class="profile-nav">Reviews</h5></a>
+                    </div>
+                </div>
+            </div>
+
+        <div class="row text-center p-4 mt-3" style="border: solid black; border-width: 0.25em; border-radius: 0.25;">
+            <% if(PageName == "posts") { %>    
+
+                <% for(let i=0; i < posts.length; i++){ %>
+                    <div class="card mb-3 back-color-1 shadow-lg" style="max-height: 220px; width: 100%;">
+                        <div class="row" >
+                            <div class="col-3" style="height: 100%;">
+                                <img src=<%=posts[i].IMG%> class="card-img" style="height: 100%; width: 220px;" alt="...">
+                            </div>
+                            <div class="col-5" >
+                                <div class="card-body" >
+                                    <% let route1 = "/posts/" +  posts[i].POST_ID + "/postPage" %> 
+                                    <a class="card-link" href= <%= route1 %>><h3 class="card-title pd-5"><%= posts[i].PRODUCTNAME %></h3></a>
+                                    <p class="card-text"><%= posts[i].DESCRIPTION %></p>
+                                    <small class="text-muted">Units Remaining: <%= posts[i].REMAINING %></small></p>
+                                </div>
+                            </div>
+                            <div class="col-4" >
+                                <div class="card-body" >
+                                    <!-- <button class="btn btn-dark btn-block pd-3" id=<%= "removePost" + i %>>REMOVE POST</button> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% } %> 
+                    
+            <% } else if(PageName == "reviews") { %>
+
+                <% for(let i=0; i < reviews.length; i++){ %>
+                    <div class="card mb-3 back-color-1 shadow-lg" style="max-height: 220px; width: 100%;">
+                        <div class="row" >
+                            <div class="col-3" style="height: 100%;">
+                                <img src="/images/post_placeholder.jpg" class="card-img" style="height: 100%; width: 220px;" alt="...">
+                            </div>
+                            <div class="col-5" >
+                                <div class="card-body" >
+                                    <% let route1 = "/posts/" +  reviews[i].REVIEW_ID + "/postPage" %> 
+                                    <p class="card-text"><%= reviews[i].TEXT %></p>
+                                </div>
+                            </div>
+                            <div class="col-4" >
+                                <div class="card-body" >
+                                    <% let route2 = "/posts/" +  reviews[i].POST_ID + "/postPage" %>
+                                    <button class="btn btn-dark btn-block pd-3" > <a class="card-link" style="color: white  !important;" href=<%= route2 %>>VISIT POST</a> </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+
+            <% } %>
+        </div>
+    </div>
+</div>
+
+<script>
+    let posts = <%- JSON.stringify(posts) %>;
+    let reviews = <%- JSON.stringify(reviews) %>;
+</script>
+
+
+<%- include('components/footer'); -%>
