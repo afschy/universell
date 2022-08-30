@@ -3,20 +3,28 @@ const path = require('path');
 const router = express.Router({mergeParams: true});
 
 const post_api = require('../../database/post_api');
+const cart_api = require('../../database/cart_api');
 
-router.get('/', async(req, res) =>{
+router.get('/', async(req, res) => {
+    console.log("hi");
     let text = req.query.text.toString();
     let sortBy = req.query.sortBy.toString(); // PRICE or TIME or NEGOTIABLE 
     let sortType = req.query.sortType.toString(); // ASC or DESC
 
     let result = await post_api.searchForPost(text, sortBy, sortType);
-    // console.log(result.productMatch);
-    // console.log(result.descriptionMatch);
-    // console.log(result.tagMatch);
+    let allPosts = result.productMatch;
+    allPosts = allPosts.concat(result.descriptionMatch);
+    allPosts = allPosts.concat(result.tagMatch);
+
+    let _cartPosts = await cart_api.getCartPosts(req.session.user_id);
+    
     const binds = {
-        productMatch: result.productMatch,
-        descriptionMatch: result.descriptionMatch
+        allPosts : allPosts,
+        PageName: "home",
+        cartNum : _cartPosts.length
     };
+
+    res.render('userSearchPage.ejs', binds);
 });
 
 module.exports = router;

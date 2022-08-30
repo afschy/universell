@@ -2,7 +2,7 @@
 
 <div class="row m-5">
     <div class="col-4 text-center">
-        <% console.log(userInfo[0].DP); %> 
+        <% console.log(allTags); %> 
         <img src=<%= userInfo[0].DP %>  class="rounded" alt="..." style="height: 300px; width: 300px;">
         <h2 class="mt-2" style="text-align: center;"><%= userInfo[0].NAME %> </h2>
     </div>
@@ -13,10 +13,10 @@
             <div class="col-3">
                 <div class="row">
                     <div class="col-6 p-0">
-                        <a class="card-link link-color-1" href="/profile/settings"><h5 class="profile-nav">Settings</h5></a>
+                        <a class="card-link hlink-1 link-color-1 " href="/profile/settings"><h5 class="profile-nav <% if(PageName == 'settings') { %> set-profile-nav <% } %> ">Settings</h5></a>
                     </div>
                     <div class="col-6 p-0">
-                        <a class="card-link link-color-1" href="/profile/createpost"><h5 class="profile-nav">New Post</h5></a>
+                        <a class="card-link hlink-1 link-color-1" href="/profile/createpost"><h5 class="profile-nav <% if(PageName == 'createpost') { %> set-profile-nav <% } %>">New Post</h5></a>
                     </div>
                 </div>
             </div>
@@ -24,10 +24,10 @@
             <div class="col-3">
                 <div class="row">
                     <div class="col-6 link-color-1 p-0">
-                        <a class="card-link link-color-1" href="/profile/posts"> <h5 class="profile-nav">Posts</h5></a>
+                        <a class="card-link hlink-1 link-color-1" href="/profile/posts"> <h5 id="postsNav" class="profile-nav <% if(PageName == 'posts') { %> set-profile-nav <% } %>">Posts</h5></a>
                     </div>
                     <div class="col-6 p-0">
-                        <a class="card-link link-color-1" href="/profile/reviews"><h5 class="profile-nav">Reviews</h5></a>
+                        <a class="card-link hlink-1 link-color-1" href="/profile/reviews"><h5 id="reviewsNav" class="profile-nav <% if(PageName == 'reviews') { %> set-profile-nav <% } %>">Reviews</h5></a>
                     </div>
                 </div>
             </div>
@@ -35,10 +35,10 @@
             <div class="col-3">
                 <div class="row">
                     <div class="col-6 p-0">
-                        <a class="card-link link-color-1" href="/profile/wishlist"><h5 class="profile-nav">Wishlist</h5></a>
+                        <a class="card-link hlink-1 link-color-1" href="/profile/wishlist"><h5 id="wishlistNav" class="profile-nav <% if(PageName == 'wishlist') { %> set-profile-nav <% } %>">Wishlist</h5></a>
                     </div>
                     <div class="col-6 p-0">
-                        <a class="card-link link-color-1" href=""><h5 class="profile-nav">Tags</h5></a>
+                        <a class="card-link hlink-1 link-color-1" href="/profile/tags"><h5 id="tagsNav" class="profile-nav <% if(PageName == 'tags') { %> set-profile-nav <% } %>">Tags</h5></a>
                     </div>
                 </div>
             </div>
@@ -47,11 +47,11 @@
             <div class="col-3">
                 <div class="row">
                     <div class="col-6 p-0">
-                        <a class="card-link link-color-1" href="/profile/buying"><h5 class="profile-nav">Buying</h5></a>
+                        <a class="card-link hlink-1 link-color-1" href="/profile/buying"><h5 id="buyingNav" class="profile-nav <% if(PageName == 'buying') { %> set-profile-nav <% } %>">Buying</h5></a>
                     </div>
 
                     <div class="col-6 p-0">
-                        <a class="card-link link-color-1" href="/profile/selling"><h5 class="profile-nav">Selling</h5></a>
+                        <a class="card-link hlink-1 link-color-1" href="/profile/selling"><h5 id="sellingNav" class="profile-nav <% if(PageName == 'selling') { %> set-profile-nav <% } %>">Selling</h5></a>
                     </div>
                 </div>
             </div>
@@ -172,7 +172,7 @@
             <% } else if(PageName == "wishlist") { %>
 
                 <% for(let i=0; i < allProducts.length; i++){ %>
-                    <div class="card mb-3 back-color-1 shadow-lg col-12 p-2 m-3" style="max-height: 220px; width: 100%;">
+                    <div class="card mb-3 back-color-1 shadow-lg col-12 p-2" style="max-height: 220px; width: 100%;">
                         <div class="row" >
                             <div class="col-8" >
                                 <h3 class="card-text"><%= allProducts[i].NAME %></h3>
@@ -200,7 +200,7 @@
             <% } else if(PageName == "buying") { %>
 
                 <% for(let i=0; i < allBuyTransactions.length; i++){ %>
-                    <div class="card mb-3 back-color-1 shadow-lg col-12 p-2 m-3" style="max-height: 220px; width: 100%;">
+                    <div class="card mb-3 back-color-1 shadow-lg col-12 p-2" style="max-height: 220px; width: 100%;">
                         <div class="row" >
                             <div class="col-8" >
                                 <h3 class="card-text"><%= allBuyTransactions[i].PRODUCT_NAME %></h3>
@@ -217,7 +217,7 @@
             <% } else if(PageName == "selling") { %>
 
                 <% for(let i=0; i < allSellTransactions.length; i++){ %>
-                    <div class="card mb-3 back-color-1 shadow-lg col-12 p-2 m-3" style="max-height: 220px; width: 100%;">
+                    <div class="card mb-3 back-color-1 shadow-lg col-12 p-2" style="max-height: 220px; width: 100%;">
                         <div class="row" >
                             <div class="col-8" >
                                 <h3 class="card-text"><%= allSellTransactions[i].PRODUCT_NAME %></h3>
@@ -235,11 +235,22 @@
                         </div>
                     </div>
                 <% } %>
-                
-            <% } %> 
 
-            
-   
+            <% } else if(PageName == "tags") { %>
+
+                <% for(let i=0; i < allTags.length; i++){ %>
+                    <div class="col-6 ">
+                        <div class="card mb-3 back-color-1 shadow-lg p-2" style="max-height: 220px; width: 100%;">
+                            <div class="row card-body">
+                                <h3 class="card-text col-8"><%= allTags[i].NAME %></h3>
+                                <div class="col-4 upvote m-0 p-0" style="height: 2em;">
+                                    <button id=<%= "tagButton" + i %> class="btn btn-block <% if(allTags[i].HAS_FOLLOWED == 1) { %>  upvoteon2 <% } else { %> upvoteoff2 <% } %>"><i style="font-size: 20px;" class="fa-brands fa-gratipay pd-4"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+            <% } %> 
         </div>
     </div>
 </div>
@@ -375,6 +386,31 @@
                 url: "/profile/approve",
                 data: {
                     ORDER_ID : allSellTransactions[i].ORDER_ID
+                },
+                success: function (res) {
+                    $(document).ajaxStop(function(){
+                        window.location.reload();
+                    });
+                },
+                error: function (result) {
+                    alert('error');
+                }
+            });
+        });
+    }
+
+
+    let allTags = <%- JSON.stringify(allTags) %>;
+
+    for (let i = 0; i < allTags.length; i++) {
+        $(`#tagButton${i}`).click(function(e){
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "/profile/togglefollow",
+                data: {
+                    TAG_ID : allTags[i].TAG_ID,
+                    HAS_FOLLOWED : (allTags[i].HAS_FOLLOWED + 1)%2
                 },
                 success: function (res) {
                     $(document).ajaxStop(function(){

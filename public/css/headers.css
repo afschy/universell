@@ -57,6 +57,13 @@
     background-color: #CFE8A9;
   }
 
+  .back-color-3{
+    background-color: #FFE75E;
+  }
+
+  .back-color-4{
+    background-color: #FEB72B;
+  }
 
   .card-image{
     height: 8em;
@@ -72,11 +79,6 @@
   .logo-color{
     color: #0C8140;
   }
-
-  a{
-    color: black !important;
-  }
-
 
   .carousel-link:hover {
     color: black !important;
@@ -152,4 +154,13 @@
   .profile-nav:hover{
     background-color:  #96E58A;
     border-radius: 0.25em;
+  }
+
+  .set-profile-nav{
+    background-color:  #5FD068 !important;
+    border-radius: 0.25em !important;
+  }
+
+  .hlink-1{
+    color: black !important;
   }

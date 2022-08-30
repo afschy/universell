@@ -4,17 +4,16 @@
 
 <div class="col-4">
     <% let postRoute = "/posts/" + homePagePosts[i].POST_ID + "/option" %> 
-    <!-- <% console.log(postRoute) %> -->
 
 <div class="card mb-3 shadow-lg back-color-1">
 <img src=<%=homePagePosts[i].IMG%> class="card-img-top" style="height: 15em;" alt="...">
 <div class="card-body back-color-1">
-    <a href = <%= postRoute %> >
-    <h5 class="card-title"><%=homePagePosts[i].PRODUCTNAME%></h5>
+    <a href = <%= postRoute %> class="card-link hlink-1">
+        <h5 class="card-title"><%=homePagePosts[i].PRODUCTNAME%></h5>
     </a>
     <p class="card-text"><%=homePagePosts[i].DESCRIPTION%></p>
-    <p class="card-text">Seller: <%=homePagePosts[i].USERNAME%></p>
-    <p class="card-text">Price: <%=homePagePosts[i].PRICE%></p>
+    <p class="card-text">Seller: <%=homePagePosts[i].USERNAME%> </p>
+    <p class="card-text">Price: <%=homePagePosts[i].PRICE%> Tk</p>
     
     <% if(homePagePosts[i].NEGOTIABLE == 1){ %>
         <p class="card-text">(Price is Negotiable)</p>

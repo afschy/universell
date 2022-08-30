@@ -1,0 +1,72 @@
+<%= console.log(allPosts) %> 
+<%- include('components/header', {PageName : PageName}); -%>
+<div class="row" style="width: 100%; padding-left: 2em; padding-right: 2em; margin: 0;">
+    <div class="col-12 pt-5">
+        <div class="row">
+
+            <% for(let i=0; i < allPosts.length; i++){ %>
+            
+            <div class="col-3">
+                <% let postRoute = "/posts/" + allPosts[i].POST_ID + "/option" %> 
+            
+            <div class="card mb-3 shadow-lg back-color-1">
+            <img src=<%=allPosts[i].IMG%> class="card-img-top" style="height: 15em;" alt="...">
+            <div class="card-body back-color-1">
+                <a href = <%= postRoute %> class="card-link hlink-1">
+                    <h5 class="card-title"><%=allPosts[i].PRODUCTNAME%></h5>
+                </a>
+                <p class="card-text"><%=allPosts[i].DESCRIPTION%></p>
+                <p class="card-text">Seller: <%=allPosts[i].USERNAME%> </p>
+                <p class="card-text">Price: <%=allPosts[i].PRICE%> Tk</p>
+                
+                <% if(allPosts[i].NEGOTIABLE == 1){ %>
+                    <p class="card-text">(Price is Negotiable)</p>
+                <% }else{ %>
+                    <p class="card-text">(Price is NOT Negotiable)</p>
+                <% } %>
+            
+                <p class="card-text"><%=allPosts[i].REMAINING%> Units Remaining</p>
+                <p class="card-text">This post was upvoted by <%=allPosts[i].UPVOTECOUNT%> people</p>
+                <p class="card-text"><small class="text-muted">Created On: <%=allPosts[i].TIME%></small></p>
+            
+                <button class="btn btn-dark btn-block">Buy now</button>
+                <button class="btn btn-dark btn-block" id=<%= "addCartButton" + i %>>Add to cart</button>
+            </div>
+            </div>
+            
+            </div>
+            
+            <% } %>
+            
+            <% if(PageName == "home") { %> 
+            <script>
+                let posts = <%- JSON.stringify(allPosts) %>;
+            
+                for (let i = 0; i < posts.length; i++) {
+                    $(`#addCartButton${i}`).click(function (e) {
+                        // console.log(posts[i]);
+                        e.preventDefault();
+                        $.ajax({
+                        type: "POST",
+                        url: "/cart/addToCart",
+                        data: {
+                            POST_ID : posts[i].POST_ID
+                        },
+                        success: function (res) {
+                            $(`#cartNum`).html("(" + res.cartNum + ")"); 
+                        },
+                        error: function (result) {
+                            alert('error');
+                        }
+                        });
+                    });
+                }
+            </script>
+            <% } %> 
+            
+        </div>
+    </div>
+    
+</div>
+
+<%- include('components/footer'); -%>

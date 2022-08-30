@@ -70,6 +70,7 @@ router.post('/togglefollow', async(req, res) =>{
         await product_api.addToFollow(req.session.user_id, tag_id);
     else
         await product_api.removeFromFollow(req.session.user_id, tag_id);
+    res.redirect('/profile/tags');
 });
 
 router.post('/deletepost', async(req, res) =>{

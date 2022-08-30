@@ -1,19 +1,26 @@
 <div style="text-align: center;">
 
 
-<div class="card mb-4" style="width: 21rem;">
-  <div class="card-body">
+<div class="card mb-4 shadow-lg" style="width: 21rem; border-color: black;">
+  <div class="card-body" style="background-color: #FEB72B; border: 1px solid black !important;">
     <h5 class="card-title">Top Seller</h5>
     <p class="card-text">Explore the bussinessmen.</p>
   </div>
 
+  <% console.log(newPosts); %> 
   <ul class="list-group list-group-flush">
-    
     <% for(let i=0; i < topSellers.length; i++){ %>
-    <li class="list-group-item">
-      <a href="#" class="card-link link-secondary">
-        <%=topSellers[i].USERNAME%>, Sell Count = <%=topSellers[i].SOLDNUM%>
-      </a>
+    <li class="list-group-item" style="background-color: #FFE75E;">
+      <div class="row" >
+        <div class="col-6">
+          <a href="#" class="card-link hlink-1">
+            <%=topSellers[i].USERNAME%> 
+          </a>
+        </div>
+        <div class="col-6">
+          <p><%=topSellers[i].SOLDNUM%></p>
+        </div>
+      </div>
     </li>
     <% } %>
   
@@ -21,8 +28,8 @@
 
 </div>
 
-<div class="card mb-4" style="width: 21rem;">
-  <div class="card-body">
+<div class="card mb-4 shadow-lg" style="width: 21rem; border-color: black;">
+  <div class="card-body" style="background-color: #FEB72B; border: 1px solid black !important;">
     <h5 class="card-title">Star Seller</h5>
     <p class="card-text">Reliabiliy comes first.</p>
   </div>
@@ -30,10 +37,17 @@
   <ul class="list-group list-group-flush">
     
     <% for(let i=0; i < starSellers.length; i++){ %>
-    <li class="list-group-item">
-      <a href="#" class="card-link link-secondary">
-        <%=starSellers[i].USERNAME%>, Avg Stars = <%=starSellers[i].STARS%>
-      </a>
+    <li class="list-group-item" style="background-color: #FFE75E;">
+      <div class="row">
+        <div class="col-6">
+          <a href="#" class="card-link hlink-1">
+            <%=starSellers[i].USERNAME%>
+          </a>
+        </div>
+        <div class="col-6">
+          <p><%=starSellers[i].STARS%></p>
+        </div>
+      </div>
     </li>
     <% } %>
   
@@ -42,8 +56,8 @@
 </div>
 
 
-<div class="card mb-4" style="width: 21rem;">
-  <div class="card-body">
+<div class="card mb-4 shadow-lg" style="width: 21rem;  border-color: black;">
+  <div class="card-body" style="background-color: #FEB72B; border: 1px solid black !important;">
     <h5 class="card-title">New Comer</h5>
     <p class="card-text">Let's see what's new</p>
   </div>
@@ -51,13 +65,18 @@
   <ul class="list-group list-group-flush">
 
     <% for(let i=0; i < newPosts.length; i++){ %>
-    <li class="list-group-item">
-      <a href="#" class="card-link">
-        <p>Product Name: <%=newPosts[i].PRODUCTNAME%></p>
-        <P>Seller: <%=newPosts[i].USERNAME%></P>
-        <P>Price: <%=newPosts[i].PRICE%></P>
-        <p>Posted On: <%=newPosts[i].TIME%></p>
-      </a>
+    <li class="list-group-item" style="background-color: #FFE75E;">
+      <div class="row">
+        <div class="col-6">
+          <% let postRoute = "/posts/" + newPosts[i].POST_ID + "/option" %> 
+          <a href=<%= postRoute %>  class="card-link hlink-1">
+            <p><%=newPosts[i].PRODUCTNAME%></p>
+          </a>
+        </div>
+        <div class="col-6">
+          <p><%=newPosts[i].TIME%></p>
+        </div>
+      </div>
     </li>
     <% } %>
 
@@ -66,9 +85,9 @@
 </div>
 
 
-<div class="card mb-4" style="width: 21rem;">
+<div class="card mb-4 shadow-lg" style="width: 21rem;  border-color: black;">
 
-  <div class="card-body">
+  <div class="card-body" style="background-color: #FEB72B; border: 1px solid black !important;">
     <h5 class="card-title">Most Reviewed</h5>
     <p class="card-text">Where authenticity matters</p>
   </div>
@@ -76,13 +95,19 @@
   <ul class="list-group list-group-flush">
 
     <% for(let i=0; i < mostReviewdPosts.length; i++){ %>
-    <li class="list-group-item">
-      <a href="#" class="card-link">
-        <p>Product Name: <%=mostReviewdPosts[i].PRODUCTNAME%></p>
-        <P>Seller: <%=mostReviewdPosts[i].USERNAME%></P>
-        <P>Price: <%=mostReviewdPosts[i].PRICE%></P>
-        <p>Reviewed by <%=mostReviewdPosts[i].REVIEWCOUNT%> people</p>
-      </a>
+    <li class="list-group-item" style="background-color: #FFE75E;">
+      <div class="row">
+        <div class="col-6">
+          <% let postRoute = "/posts/" + newPosts[i].POST_ID + "/option" %> 
+          <a href=<%= postRoute %>  class="card-link hlink-1">
+            <p><%=mostReviewdPosts[i].PRODUCTNAME%></p>
+          </a>
+        </div>
+        <div class="col-6">
+          <p><%=mostReviewdPosts[i].REVIEWCOUNT%></p>
+        </div>
+      </div>
+      
     </li>
     <% } %>
 

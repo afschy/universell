@@ -62,14 +62,15 @@
           <form style="width: 100%; padding-left: 5%;">
             <div class="row pt-2">
               <div class="col-9  mb-2" style="padding-right: 0; margin: 0;">
-                <input type="text" class="form-control input-lg" placeholder="Search" style="width: 100%;">
+                <input id="searchText" type="text" class="form-control input-lg" placeholder="Search" style="width: 100%;">
               </div>
               <div class="col-1" style="padding-left: 0;">
                 <%- include('dropdown.ejs'); -%>
               </div>
-              <div class="col-1" style="padding-left: 0;">
-                <button type="search" class="btn btn-dark mb-2" style="width: 100%;"><i
-                    class="bi bi-search"></i></button>
+              <div class="col-1" style="padding-left: 0;">     
+                  <button id="searchButton" type="search" class="btn btn-dark mb-2" style="width: 100%;">
+                    <i class="bi bi-search"></i>
+                  </button>
               </div>
             </div>
           </form>
@@ -82,15 +83,42 @@
         <div class="col-2 pt-3">
           <div class="row ">
             <div class="col-4" style="padding: 0; padding-top: 0.1em;">
-              <a href="/cart" class="card-link">
+              <a href="/cart" class="card-link hlink-1">
                 <i class="bi bi-cart" style="display: inline; font-size: 25px;"> </i>
                 <p id="cartNum" style="display: inline; font-size:20px;"> (<%= cartNum %>) </p>
               </a>
             </div>
-            <div class="col-4 pt-2" style="padding: 0;"> <a href="/profile/settings" class="card-link text-type-1">Profile</a></div>
-            <div class="col-4 pt-2" style="padding: 0;"> <a href="#" class="card-link text-type-1">Login</a> </div>
+            <div class="col-4 pt-2" style="padding: 0;"> <a href="/profile/settings" class="card-link text-type-1 hlink-1">Profile</a></div>
+            <div class="col-4 pt-2" style="padding: 0;"> <a href="#" class="card-link text-type-1 hlink-1">Login</a> </div>
           </div>
         </div>
       <% } %> 
     </div>
   </div>
+
+  <script>
+    $(`#searchButton`).click(function (e) {
+        e.preventDefault();
+        let route = "/search?text=" + $(`#searchText`).val(); 
+        if($(`#newest`).is(":checked")){
+          route = route + "&sortBy=TIME&sortType=DESC";
+        } 
+        else if($(`#oldest`).is(":checked")){
+          route = route + "&sortBy=TIME&sortType=ASC";
+        }
+        else if($(`#max_price`).is(":checked")){
+          route = route + "&sortBy=PRICE&sortType=DESC";
+        }
+        else if($(`#min_price`).is(":checked")){
+          route = route + "&sortBy=PRICE&sortType=ASC";
+        }
+        else if($(`#negotiable`).is(":checked")){
+          route = route + "&sortBy=NEGOTIABLE&sortType=DESC";
+        }
+        else if($(`#not_negotiable`).is(":checked")){
+          route = route + "&sortBy=NEGOTIABLE&sortType=ASC";
+        }
+        else route = route + "&sortBy=TIME&sortType=DESC";
+        window.location.href=route;
+    });
+  </script>
