@@ -89,8 +89,6 @@ router.post('/updateprofile', async(req, res) =>{
     let password = req.body.PASSWORD;
     let confirm_password = req.body.CONFIRM_PASSWORD;
     let profile_picture = req.body.PROFILE_PICTURE;
-    
-
 
     if(email.length > 0) await auth_api.updateEmail(req.session.user_id, email);
     if(password.length > 0 && password === confirm_password) await auth_api.changePassword(req.session.user_id, password);
@@ -101,6 +99,7 @@ router.post('/updateprofile', async(req, res) =>{
 router.post('/approve', async(req, res) =>{
     let order_id = req.body.ORDER_ID;
     await user_api.validateOrder(order_id);
+    await user_api.cleanupTransaction();
     res.redirect('/profile/selling');
 });
 

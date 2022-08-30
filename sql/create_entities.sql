@@ -82,3 +82,5 @@ CREATE TABLE Cmnt(
 	CONSTRAINT cmnt_post_fk FOREIGN KEY(post_id) REFERENCES Post(post_id),
 	constraint content_const CHECK(text IS NOT NULL OR image IS NOT NULL)
 );
+
+ALTER TABLE TAG MODIFY NAME VARCHAR2(200);

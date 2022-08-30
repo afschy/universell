@@ -84,6 +84,29 @@ async function getWishlistPosts(user_id, offset, limit){
     return (await database.execute(sql, binds, database.options)).rows;
 }
 
+async function getFollowPosts(user_id, offset, limit){
+    const sql = `
+    SELECT DISTINCT P.POST_ID AS POST_ID, P.DESCRIPTION AS DESCRIPTION, P.PRICE AS PRICE, P.REM_QUANTITY AS REMAINING, P.TIME AS TIME, P.NEGOTIABLE AS NEGOTIABLE, U.USER_ID AS USER_ID, U.NAME AS USERNAME, PR.NAME AS PRODUCTNAME, GET_FIRST_POST_IMAGE(P.POST_ID) AS IMG, GET_UPVOTE_COUNT(P.POST_ID) AS UPVOTECOUNT
+    FROM POST P
+    JOIN PRODUCT PR ON PR.PRODUCT_ID = P.PRODUCT_ID
+    JOIN BELONGSTO B ON B.PRODUCT_ID = PR.PRODUCT_ID
+    JOIN TAG T ON T.TAG_ID = B.TAG_ID
+    JOIN FOLLOW F ON F.TAG_ID = T.TAG_ID
+    JOIN USERS U ON U.USER_ID = P.POSTER_ID
+    WHERE F.USER_ID = :u
+    ORDER BY UPVOTECOUNT DESC
+    OFFSET :o ROWS
+    FETCH FIRST :l ROWS ONLY
+    `;
+
+    const binds = {
+        u: user_id,
+        o: offset,
+        l: limit
+    };
+    return (await database.execute(sql, binds, database.options)).rows;
+}
+
 async function getRemainingNum(post_id){
     const sql = `
     SELECT REM_QUANTITY AS REMAINING
@@ -167,6 +190,7 @@ async function searchForPost(text, sortBy, sortType){
     JOIN PRODUCT PR ON P.PRODUCT_ID = PR.PRODUCT_ID
     JOIN USERS U ON U.USER_ID = P.POSTER_ID
     WHERE LOWER(PR.NAME) LIKE ` + `'%` + text + `%'` + ` ORDER BY ` + sortBy + ` ` + sortType;
+
     let binds = {};
     let _productMatch = (await database.execute(sql, binds, database.options)).rows;
 
@@ -177,11 +201,24 @@ async function searchForPost(text, sortBy, sortType){
     JOIN PRODUCT PR ON P.PRODUCT_ID = PR.PRODUCT_ID
     JOIN USERS U ON U.USER_ID = P.POSTER_ID
     WHERE LOWER(P.DESCRIPTION) LIKE ` + `'%` + text + `%'` + ` ORDER BY ` + sortBy + ` ` + sortType;
+
     let _descriptionMatch = (await database.execute(sql, binds, database.options)).rows;
+
+    sql = `
+    SELECT DISTINCT P.POST_ID AS POST_ID, P.DESCRIPTION AS DESCRIPTION, P.PRICE AS PRICE, P.REM_QUANTITY AS REMAINING, P.TIME AS TIME, P.NEGOTIABLE AS NEGOTIABLE, U.USER_ID AS USER_ID, U.NAME AS USERNAME, PR.NAME AS PRODUCTNAME, GET_FIRST_POST_IMAGE(P.POST_ID) AS IMG, GET_UPVOTE_COUNT(P.POST_ID) AS UPVOTECOUNT
+    FROM POST P
+    JOIN PRODUCT PR ON PR.PRODUCT_ID = P.PRODUCT_ID
+    JOIN BELONGSTO B ON B.PRODUCT_ID = PR.PRODUCT_ID
+    JOIN TAG T ON T.TAG_ID = B.TAG_ID
+    JOIN USERS U ON U.USER_ID = P.POSTER_ID
+    WHERE LOWER(T.NAME) LIKE ` + `'%` + text + `%'` + ` ORDER BY ` + sortBy + ` ` + sortType;
+
+    let _tagMatch = (await database.execute(sql, binds, database.options)).rows;
 
     let result = {
         productMatch: _productMatch,
-        descriptionMatch: _descriptionMatch
+        descriptionMatch: _descriptionMatch,
+        tagMatch: _tagMatch
     };
     return result;
 }
@@ -191,6 +228,7 @@ module.exports = {
     getNewPosts,
     getTopPosts,
     getWishlistPosts,
+    getFollowPosts,
     getMostReviewedPosts,
     getRemainingNum,
     getAllInfo,

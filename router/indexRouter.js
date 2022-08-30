@@ -33,7 +33,8 @@ router.get('/', async(req, res) =>{
     // TODO: Replace 1 with req.session.user_id
     let wishlistHomepagePosts = await post_api.getWishlistPosts(req.session.user_id, 0, 25);
     let newHomepagePosts = await post_api.getNewPosts(0, 25);
-    let _homepagePosts = [...new Set([...wishlistHomepagePosts, ...newHomepagePosts])];
+    let followHomepagePosts = await post_api.getFollowPosts(req.session.user_id, 0, 25);
+    let _homepagePosts = [...new Set([...wishlistHomepagePosts, ...followHomepagePosts, ...newHomepagePosts])];
     let _cartPosts = await cart_api.getCartPosts(req.session.user_id);
 
     const binds = {

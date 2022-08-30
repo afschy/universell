@@ -91,6 +91,12 @@ async function validateOrder(order_id){
     await database.execute(sql, binds, database.options);
 }
 
+async function cleanupTransaction(){
+    const sql = 'DELETE FROM TRANSACTION WHERE STATUS = 0 AND QUANTITY > GET_REM_QUANTITY(POST_ID)';
+    const binds = {};
+    await database.execute(sql, binds, database.options);
+}
+
 module.exports = {
     getTopSellers,
     getStarSellers,
@@ -98,5 +104,6 @@ module.exports = {
     getReviewsByID,
     getAllSellTransactions,
     getAllBuyTransactions,
-    validateOrder
+    validateOrder,
+    cleanupTransaction
 }
