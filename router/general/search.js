@@ -7,7 +7,6 @@ const post_api = require('../../database/post_api');
 const cart_api = require('../../database/cart_api');
 
 router.get('/', async(req, res) => {
-    console.log("hi");
     let text = req.query.text.toString();
     let sortBy = req.query.sortBy.toString(); // PRICE or TIME or NEGOTIABLE 
     let sortType = req.query.sortType.toString(); // ASC or DESC
