@@ -11,6 +11,7 @@ const reviewRouter = require('./general/review');
 const cmntRouter = require('./general/cmnt');
 const searchRouter = require('./general/search');
 const otherProfileRouter = require('./user/otherprofile');
+const logoutRouter = require('./auth/logout');
 
 const user_api = require('../database/user_api');
 const post_api = require('../database/post_api');
@@ -62,5 +63,6 @@ router.use('/review', reviewRouter);
 router.use('/cmnt', cmntRouter);
 router.use('/search', searchRouter);
 router.use('/otherprofile', otherProfileRouter);
+router.use('/logout', logoutRouter);
 
 module.exports = router;

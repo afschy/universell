@@ -13,11 +13,7 @@ router.get('/', async(req, res) => {
     let sortType = req.query.sortType.toString(); // ASC or DESC
 
     let result = await post_api.searchForPost(text, sortBy, sortType);
-
-    let allPosts = result.productMatch;
-    allPosts = allPosts.concat(result.descriptionMatch);
-    allPosts = allPosts.concat(result.tagMatch);
-
+    let allPosts = [...new Set([...result.productMatch, ...result.descriptionMatch, ...result.tagMatch])];
     let _cartPosts = await cart_api.getCartPosts(req.session.user_id);
     
     const binds = {
@@ -27,7 +23,6 @@ router.get('/', async(req, res) => {
     };
 
     res.render('userSearchPage.ejs', binds);
-
 });
 
 module.exports = router;
